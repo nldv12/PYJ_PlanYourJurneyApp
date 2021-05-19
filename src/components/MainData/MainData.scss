@@ -5,39 +5,36 @@
 .MainData {
   flex-direction: column;
   align-items: center;
-    .mainHeader {
-    margin-top: 15px;
-    margin-bottom: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 19px;
-  }
 
-  span {
-    color: white;
+  .title {
+    text-align: center;
+    width: 252px;
+    color: $myTomato;
     display: flex;
     font-size: 18px;
-    background-color: $myTomato;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: white;
     border-radius: 5px;
     padding: 15px;
     text-transform: none;
+    margin-left: 14px;
+    margin-top: 19px;
+  }
+  .form {
+    margin: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .formElement {
+    text-align: left;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
-.form {
-  margin: 10px 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
-}
-
-.formElement {
-  text-align: left;
-  margin: 10px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
 

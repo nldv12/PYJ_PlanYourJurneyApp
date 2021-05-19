@@ -9,15 +9,9 @@ export const IfBus = () => {
 
     return (
         <div className={"IfBus"}>
-            <h1>BUS</h1>
-
-            <div className={"mainHeader"}>
-                <TotalPrice/>
-                <div className={"hamburger"}> </div>
-            </div>
-
-
+            <TotalPrice/>
             <div className={"form"}>
+                <p>BUS</p>
                 <div className={"formElement"}>
                     <FormLabel name={"Price for ticket"}/>
                     <InputNumber placeholder={"Price for single return ticket"}/>
@@ -39,8 +33,9 @@ export const IfBus = () => {
                     <InputCheckbox name={"I would like to add attractions"}/>
                 </div>
                 <div className={"buttons"}><button className={"btn"}>Next</button></div>
+                <p>BUS</p>
             </div>
-            <p>BUS</p>
+
         </div>
     )
 }

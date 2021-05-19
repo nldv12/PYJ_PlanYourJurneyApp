@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import './App.css';
 import {db} from "./firebase"
+import {Menu} from "./components/Menu/Menu";
 import {MainPage} from "./components/MainPage/MainPage";
 import {MainData} from "./components/MainData/MainData";
 import {IfCar} from "./components/IfCar/IfCar";
@@ -33,6 +34,7 @@ function App() {
             {journeys.map(({destination, from, id}) => {
                 return (
                     <div className={"mydiv"} key={id}>
+                        <Menu/>
                         <MainPage/>
                         <MainData/>
                         <IfPlane/>

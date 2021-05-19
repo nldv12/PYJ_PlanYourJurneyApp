@@ -9,15 +9,9 @@ export const IfCar = () => {
 
     return (
         <div className={"IfCar"}>
-            <p>CAR</p>
-
-            <div className={"mainHeader"}>
-                <TotalPrice/>
-                <div className={"hamburger"}> </div>
-            </div>
-
-
+            <TotalPrice/>
             <div className={"form"}>
+                <p>CAR</p>
                 <div className={"formElement"}>
                     <FormLabel name={"Distance"}/>
                     <InputNumber placeholder={"How many km to the Destination"}/>
@@ -43,8 +37,9 @@ export const IfCar = () => {
                     <InputCheckbox name={"I would like to add attractions"}/>
                 </div>
                 <div className={"buttons"}><button className={"btn"}>Next</button></div>
+                <p>CAR</p>
             </div>
-            <p>CAR</p>
+
         </div>
     )
 }

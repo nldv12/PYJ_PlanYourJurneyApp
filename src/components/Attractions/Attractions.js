@@ -10,15 +10,9 @@ export const Attractions = () => {
 
     return (
         <div className={"Attractions"}>
-
-
-            <div className={"mainHeader"}>
-                <TotalPrice/>
-                <div className={"hamburger"}> </div>
-            </div>
-
-
+            <TotalPrice/>
             <div className={"form"}>
+                <p>ATTRACTIONS</p>
                 <div className={"formElement"}>
                     <FormLabel name={"Type of activity"}/>
                     <InputSelect5 value1={"Excursion"}  value2={"Bungee Jumping"}  value3={"Waterpark"}  value4={"Museum"}  value5={"Other"}/>
@@ -39,8 +33,7 @@ export const Attractions = () => {
                     <button className={"btn"}>I am done</button>
                     <button className={"btn"}>Lets add one more activity!</button>
                 </div>
-
-
+                <p>ATTRACTIONS</p>
             </div>
         </div>
     )

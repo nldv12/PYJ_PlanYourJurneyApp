@@ -22,7 +22,8 @@
 
 }
 .myCheck {
-  margin-top: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   font-size: 18px;
@@ -30,7 +31,6 @@
   color: $myBlue;
   font-weight: 500;
   letter-spacing: 1px;
-
 }
 
 .inputText::placeholder {
@@ -60,5 +60,39 @@
   color: #47b8e0;
 }
 
+
+.totalPrice {
+  width: 160px;
+  font-family: "Roboto", "sans-serif";
+  color: #f8f1f1;
+  font-size: 18px;
+  background-color: $myTomato;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 20px;
+  margin-left: 95px;
+
+
+}
+
+.btn {
+  background: $myPurple;
+  font-family: "Roboto", "sans-serif";
+  font-weight: 500;
+  font-size: 19px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 25px;
+  margin-top: 16px;
+  width: 100%;
+  outline: none;
+
+}
+.buttons {
+  width: 300px;
+}
 
 

@@ -106,7 +106,7 @@ export const TotalPrice = ({name}) => {
 
     return (
         <>
-            <div ><span>Total Price: 3000</span></div>
+            <div className={"totalPrice"} >Total Price: 3000 </div>
         </>
 
     )

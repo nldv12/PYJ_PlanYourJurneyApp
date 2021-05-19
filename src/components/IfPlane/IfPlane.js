@@ -9,15 +9,9 @@ export const IfPlane = () => {
 
     return (
         <div className={"IfPlane"}>
-            <p>PLANE</p>
-
-            <div className={"mainHeader"}>
-                <TotalPrice/>
-                <div className={"hamburger"}> </div>
-            </div>
-
-
+            <TotalPrice/>
             <div className={"form"}>
+                <p>PLANE</p>
                 <div className={"formElement"}>
                     <FormLabel name={"Price for ticket"}/>
                     <InputNumber placeholder={"Price for single return ticket"}/>
@@ -39,8 +33,9 @@ export const IfPlane = () => {
                     <InputCheckbox name={"I would like to add attractions"}/>
                 </div>
                 <div className={"buttons"}><button className={"btn"}>Next</button></div>
+                <p>PLANE</p>
             </div>
-            <p>PLANE</p>
+
         </div>
     )
 }

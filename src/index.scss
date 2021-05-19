@@ -9,7 +9,8 @@ body {
 
 }
 p {
-  color: white;
+  color: #7e7e7e;
+  font-style: italic;
 }
 
 
@@ -24,18 +25,3 @@ code {
 //  font-size: 10px;
 //}
 
-.btn {
-  background: $myPurple;
-  font-family: "Roboto", "sans-serif";
-  font-weight: 500;
-  font-size: 18px;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 25px;
-  margin-top: 16px;
-  width: 100%;
-}
-.buttons {
-  width: 300px;
-}

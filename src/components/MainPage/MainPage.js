@@ -6,12 +6,8 @@ export const MainPage = () => {
 
     return (
         <div className={"mainPage"}>
+            <div className={"title"}>Choose your travel style</div>
 
-            <div className={"mainHeader"}>
-                <div><span>Choose your travel style</span></div>
-                <div className={"hamburger"}> </div>
-
-            </div>
             <div className={"mainAllBoxes"}>
                 <div className={"mainRowBoxes"}>
                     <div className={" mainPlane mainBoxImage"}> </div>
