@@ -46,6 +46,9 @@ body {
   border-radius: 10px;
   box-shadow: $box-shadow;
   overflow: hidden;
+  transition: 0.3s;
+
+
 
   .mainPlane {
     background-image: url("../../images/plane.jpg");
@@ -62,7 +65,9 @@ body {
 
   }
 }
-
+.mainRowBoxes:active {
+  transform: scale(0.9);
+}
 .mainBoxImage {
   background-size: cover;
   background-repeat: no-repeat;

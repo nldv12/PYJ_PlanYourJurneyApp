@@ -19,8 +19,13 @@
   border-radius: 4px;
   background-color: #f1f1f1;
   font-size: 20px;
-
+  transition: 0.3s;
 }
+
+.InputCheckbox:active {
+  transform: scale(0.5);
+}
+
 .myCheck {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -89,7 +94,12 @@
   margin-top: 16px;
   width: 100%;
   outline: none;
+  transition: 0.3s;
 
+
+}
+.btn:active {
+  transform: scale(0.9);
 }
 .buttons {
   width: 300px;
