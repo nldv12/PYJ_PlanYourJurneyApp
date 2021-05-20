@@ -76,7 +76,7 @@ export const InputSelect2 = ({value1, value2}) => {
 
     )
 }
-export const InputCheckbox = ({name}) => {
+const InputCheckbox = ({name}) => {
 
     return (
         <div className={"myCheck"}>
@@ -106,7 +106,7 @@ export const TotalPrice = ({name}) => {
 
     return (
         <>
-            <div className={"totalPrice"} >Total Price: 3000 </div>
+            <div className={"totalPrice"}>Total Price: 3000</div>
         </>
 
     )

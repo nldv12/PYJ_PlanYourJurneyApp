@@ -3,6 +3,7 @@ import "./Attractions.scss"
 import {InputNumber, InputCheckbox, InputSelect5} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
+import {Link} from "react-router-dom";
 
 
 export const Attractions = () => {
@@ -30,8 +31,8 @@ export const Attractions = () => {
                     <InputNumber placeholder={"The number of repetitions"}/>
                 </div>
                 <div className={"buttons"}>
-                    <button className={"btn"}>I am done</button>
-                    <button className={"btn"}>Lets add one more activity!</button>
+                    <Link to="/MyJourneys" className={"btn"}>I am done</Link>
+                    <Link to="/Attractions" className={"btn"}>Lets add one more activity!</Link>
                 </div>
                 <p>ATTRACTIONS</p>
             </div>

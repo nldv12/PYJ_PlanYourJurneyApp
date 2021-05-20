@@ -1,0 +1,54 @@
+@import "../variables";
+
+
+
+.MyJourneys {
+  flex-direction: column;
+  align-items: center;
+  .title {
+    text-align: center;
+    width: 252px;
+    color: #f8f1f1;
+    display: flex;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: $myTomato;
+    border-radius: 5px;
+    padding: 15px;
+    text-transform: none;
+    margin-left: 14px;
+    margin-top: 19px;
+  }
+  .singleJourney {
+    display: block;
+    text-decoration: none;
+    background: white;
+    margin: 30px;
+    padding: 15px 35px 15px 35px;
+    border-radius: 30px;
+    line-height: 30px;
+    transition: 0.3s;
+  }
+  .singleJourney:active {
+    transform: scale(0.9);
+  }
+
+  .sum_Line {
+    display: flex;
+    justify-content: space-between;
+    font-style: italic;
+    color: $myTomato;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 500;
+
+    span {
+      color: #d96565;
+      font-weight: 600;
+    }
+  }
+
+}
+
+

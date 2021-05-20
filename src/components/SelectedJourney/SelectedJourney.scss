@@ -1,0 +1,22 @@
+@import "../variables";
+
+
+
+.SelectedJourney {
+  background: white;
+  margin: 10px;
+  padding: 15px 35px 15px 35px;
+  border-radius: 10px;
+  line-height: 30px;
+  transition: 0.3s;
+  color: $myTomato;
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  .single_element {
+
+  }
+
+}
+
+

@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import "./Menu.scss"
+import {Link} from "react-router-dom";
+
 
 // import {InputNumber, InputCheckbox, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 // import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
@@ -30,17 +32,17 @@ export const Menu = () => {
 
                         <ul className={"nav-list"}>
                             <li className={"nav-item"}>
-                                <a href="#" className={"nav-link"}>Plan new Journey</a>
+                                <Link onClick={handleClick} to="/" className={"nav-link"}>Plan new Journey</Link>
                             </li>
                             <li className={"nav-item"}>
-                                <a href="#" className={"nav-link"}>My Journeys</a>
+                                <Link onClick={handleClick} to="/MyJourneys" className={"nav-link"}>My Journeys</Link>
                             </li>
-                            <li className={"nav-item"}>
-                                <a href="#" className={"nav-link"}>About App</a>
-                            </li>
-                            <li className={"nav-item"}>
-                                <a href="#" className={"nav-link"}>Contact developer</a>
-                            </li>
+                            {/*<li className={"nav-item"}>*/}
+                            {/*    <Link onClick={handleClick} to="/" className={"nav-link"}>About App</Link>*/}
+                            {/*</li>*/}
+                            {/*<li className={"nav-item"}>*/}
+                            {/*    <Link onClick={handleClick} to="/" className={"nav-link"}>Contact developer</Link>*/}
+                            {/*</li>*/}
                         </ul>
 
                     </nav>

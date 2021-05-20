@@ -2,6 +2,7 @@ import React from "react";
 import "./IfBus.scss"
 import {InputNumber, InputCheckbox, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
+import {Link} from "react-router-dom";
 
 
 export const IfBus = () => {
@@ -28,11 +29,7 @@ export const IfBus = () => {
                     <FormLabel name={"Any extra fees"}/>
                     <InputNumber placeholder={"Type here sum of all extra fees"}/>
                 </div>
-
-                <div className={"formElement"}>
-                    <InputCheckbox name={"I would like to add attractions"}/>
-                </div>
-                <div className={"buttons"}><button className={"btn"}>Next</button></div>
+                <Link to="/MainData" ><button className={"btn"}>Next</button></Link>
                 <p>BUS</p>
             </div>
 
