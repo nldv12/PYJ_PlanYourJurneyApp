@@ -83,7 +83,7 @@
 }
 
 .btn {
-
+  margin: 0 10px;
   background: $myPurple;
   font-family: "Roboto", "sans-serif";
   font-weight: 500;
@@ -99,8 +99,17 @@
   display: block;
   text-decoration: none;
   text-align: center;
+}
 
+.btn_small {
+  background: $myBlue;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  font-family: "Roboto", "sans-serif";
 }
 .btn:active {
   transform: scale(0.9);

@@ -1,19 +1,111 @@
 @import "../variables";
 
 
-
 .SelectedJourney {
-  background: white;
-  margin: 10px;
-  padding: 15px 35px 15px 35px;
-  border-radius: 10px;
-  line-height: 30px;
-  transition: 0.3s;
-  color: $myTomato;
-  font-size: 18px;
-  letter-spacing: 1px;
-  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .selected_container {
+    background: white;
+    margin: 10px;
+    padding: 15px 15px 15px 15px;
+    border-radius: 10px;
+    line-height: 30px;
+    transition: 0.3s;
+    color: $myTomato;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+
+
+  .picto_distance {
+    background-image: url("../../images/distance.svg");
+    height: 60px;
+    width: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .picto_money {
+    margin-right: 10px;
+    display: block;
+    background-image: url("../../images/money.svg");
+    height: 30px;
+    width: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .picto_car {
+    position: fixed;
+    left: 170px;
+    display: block;
+    background-image: url("../../images/car.svg");
+    height: 30px;
+    width: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .picto_bus {
+    position: fixed;
+    left: 170px;
+    display: block;
+    background-image: url("../../images/bus.svg");
+    height: 30px;
+    width: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .picto_plane {
+    position: fixed;
+    left: 170px;
+    display: block;
+    background-image: url("../../images/plane.svg");
+    height: 30px;
+    width: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .picto_person {
+    margin-right: 10px;
+    display: block;
+    background-image: url("../../images/person.svg");
+    height: 30px;
+    width: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .picto_day {
+    margin-right: 10px;
+    display: block;
+    background-image: url("../../images/day.svg");
+    height: 30px;
+    width: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .last_line {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .single_element {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .price,
+    .days,
+    .person {
+      font-size: 24px;
+    }
 
   }
 
