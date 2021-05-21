@@ -1,142 +1,96 @@
-import firebase from "./firebase"
+//TODO: DOWNLOAD DATA
 import React, {useEffect, useState} from "react";
-import {Menu} from "./components/Menu/Menu";
+import {db} from "./firebase";
 
-
-
-function App() {
-    // const [journeys, setJourneys] = useState([]);
-    const [times, setTimes] = useState([]);
-    const [value, setValue] = useState([]);
-//POBIERANIE DANNYCH Z FIREBASE
+export const TotalPrice = ({name}) => {
+    const [totalPrice, setTotalPrice] = useState([]);
 
     useEffect(() => {
-        firebase
-            .firestore()
-            .collection('journeys')
-            .onSnapshot(snapshot => {
-                const newTimes = snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data()
-                }))
-                setTimes(newTimes)
-            })
+        const fetchData = async () => {
+            const allData = await db.collection('jr1').get()
+            const data = allData.docs.map(doc => doc.data())
+            const newTotal = data.map(total => total.distance)
+
+
+
+            setTotalPrice(newTotal)
+
+        }
+        fetchData()
+
+        // db.collection('jr1')
+        // .onSnapshot(snapshot => {
+        //     const newPrice = snapshot.docs.map((doc) =>({
+        //         id: doc.id,
+        //         ...doc.data()
+        //     }))
+        //
+        //     // let newTotal = parseFloat(newPrice[2].housingSumPrice) * parseFloat(newPrice[0].numberOfPeople) + parseFloat(newPrice[0].sumPrice) + parseFloat(newPrice[1].extra);
+        //     // let newTotal = parseFloat(newPrice[1].extra);
+        //     // console.log(newTotal)
+        //
+        //     setTotalPrice(newPrice)
+        // })
+    }, []);
+    // let newTotal = parseFloat(newPrice[2].housingSumPrice) * parseFloat(newPrice[0].numberOfPeople) + parseFloat(newPrice[0].sumPrice) + parseFloat(newPrice[1].extra);
+
+
+
+    return (
+        <>
+            {/*{totalPrice.map(total => (*/}
+            {/*    <button key={"1"} className={"totalPrice"}>Total Price: {total.distance}</button>*/}
+            {/*))}*/}
+            <button key={"1"} className={"totalPrice"}>Total Price: {totalPrice}</button>
+        </>
+
+    )
+}
+
+//TODO: PUSH DATA
+
+export const IfPlane = () => {
+    const [ticket_price, setTicket_price] = useState("0");
+    const [numberOfPeople, setNumberOfPeople] = useState("0");
+    const [food_price, setFood_price] = useState("0");
+    const [prevState, setPrevState] = useState("");
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const allData = await db.collection('jr1').get()
+            const data = allData.docs.map(doc => doc.data())
+
+            setPrevState(...data)
+
+        }
+        fetchData()
+
+
     }, []);
 
 
-    //WYSYLANIE DO FIREBASE
-    const handleClick = () => {
+    let planeSumPrice = (parseFloat(ticket_price) + parseFloat(food_price)) * parseFloat(numberOfPeople)
+
+    console.log(`Cena całkowita: ${planeSumPrice}`)
+
+    const handleClick = (e) => {
+
+
         firebase
             .firestore()
-            .collection('journeys')
-            .add({
-                value
+            .collection(`jr1`)
+            .doc("Km5KnnO7T16tN5umLKva")
+            .set({
+                ...prevState,
+                ticket: ticket_price,
+                numberOfPeople: numberOfPeople,
+                food: food_price,
+                sumPrice: planeSumPrice,
+                typeOFtransport: "plane"
             })
             .then(() => {
-                setValue("")
+                // setTicket_price("")
             })
 
-
     }
-}
-
-
-
-
-
-
-
-
-//
-// // const [journeys, setJourneys] = useState([]);
-// const [times, setTimes] = useState([]);
-// const [value, setValue] = useState([]);
-// //POBIERANIE DANNYCH Z FIREBASE
-// // useEffect(() => {
-// //     db.collection("journeys")
-// //         .get()
-// //         .then((querySnapshot) => {
-// //             const allJourneys = [];
-// //             querySnapshot.forEach((doc) => {
-// //                 allJourneys.push({
-// //                     ...doc.data(),
-// //                     id: doc.id,
-// //                 })
-// //             });
-// //             setJourneys(allJourneys);
-// //
-// //         });
-// // }, []);
-// useEffect(() => {
-//     firebase
-//         .firestore()
-//         .collection('journeys')
-//         .onSnapshot(snapshot => {
-//             const newTimes = snapshot.docs.map((doc) =>({
-//                 id: doc.id,
-//                 ...doc.data()
-//             }))
-//             setTimes(newTimes)
-//         })
-// }, []);
-//
-//
-// //WYSYLANIE DO FIREBASE
-// const handleClick = () => {
-//     firebase
-//         .firestore()
-//         .collection('journeys')
-//         .add({
-//             value
-//         })
-//         .then(()=>{
-//             setValue("")
-//         })
-//
-//
-// }
-//
-//
-// // {journeys.map(({destination, from, id}) => {
-// //     return (
-// //         <div className={"mydiv"} key={id}>
-// //             <h1>Punkt docelowy: {destination}</h1>
-// //             <h2>Wyjazd z: {from}</h2>
-// //         </div>
-// //     )
-// // })}
-
-
-//
-// function App() {
-//
-//     return (
-//         <div className="App">
-//             <Menu/>
-//             {/*<h1>{times.title}</h1>*/}
-//             {times.map((time) =>
-//                 <li key={time.id}>{time.from}</li>
-//             )}
-//             <input value={value} onChange={e => setValue(e.currentTarget.value)} className={"inputText"} type="number" />
-//             <button onClick={handleClick}>click </button>
-//
-//
-//             {/*<Switch>*/}
-//             {/*    <Route path="/" exact component={Home}/>*/}
-//             {/*    <Route path="/NewJourney" exact component={NewJourney}/>*/}
-//             {/*    <Route path="/MainData" component={MainData}/>*/}
-//             {/*    <Route path="/Plane" component={IfPlane}/>*/}
-//             {/*    <Route path="/Car" component={IfCar}/>*/}
-//             {/*    <Route path="/Bus" component={IfBus}/>*/}
-//             {/*    <Route path="/Attractions" component={Attractions}/>*/}
-//             {/*    <Route path="/MyJourneys" component={MyJourneys}/>*/}
-//             {/*    <Route path="/SelectedJourney/:id" component={SelectedJourney}/>*/}
-//             {/*</Switch>*/}
-//
-//
-//
-//         </div>
-//     );
-// }
-//
-// export default App;

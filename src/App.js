@@ -1,5 +1,5 @@
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-import React, {useState, useEffect} from "react";
+import {Switch, Route} from "react-router-dom";
+import React from "react";
 import './App.css';
 // import {db} from "./firebase"
 // import firebase from "./firebase"
@@ -7,6 +7,7 @@ import {Menu} from "./components/Menu/Menu";
 import {Home} from "./components/Home/Home";
 import {NewJourney} from "./components/NewJourney/NewJourney";
 import {MainData} from "./components/MainData/MainData";
+import {Housing} from "./components/Housing/Housing";
 import {IfCar} from "./components/IfCar/IfCar";
 import {IfBus} from "./components/IfBus/IfBus";
 import {IfPlane} from "./components/IfPlane/IfPlane";
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/" exact component={Home}/>
                 <Route path="/NewJourney" exact component={NewJourney}/>
                 <Route path="/MainData" component={MainData}/>
+                <Route path="/Housing" component={Housing}/>
                 <Route path="/Plane" component={IfPlane}/>
                 <Route path="/Car" component={IfCar}/>
                 <Route path="/Bus" component={IfBus}/>

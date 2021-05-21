@@ -1,35 +1,40 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "./MainData.scss"
-import {InputNumber, InputText, InputSelect} from "../MainCOMPONENTS/MainCOMPONENTS";
+import {InputNumber, InputText} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
-import firebase from "../../firebase";
+import firebase, {db} from "../../firebase";
 
 
 export const MainData = () => {
     const [destination, setDestination] = useState("");
     const [from, setFrom] = useState("");
-    const [housing, setHousing] = useState("Hotel");
-    const [numberOfPeople, setNumberOfPeople] = useState("");
-    const [numberOfNights, setNumberOfNights] = useState("");
-
-
+    const [extra_price, setExtra_price] = useState("0");
 
     const [check, setCheck] = useState(false);
 
+    const [prevState, setPrevState] = useState("0");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const allData = await db.collection('jr1').get()
+            const data = allData.docs.map(doc => doc.data())
+            setPrevState(...data)
+        }
+        fetchData()
+    }, []);
+
 
     const handleClick = (e) => {
-
         firebase
             .firestore()
-            .collection(`jr2`)
-            .add({
+            .collection(`jr1`)
+            .doc("1")
+            .set({
+                ...prevState,
                 destination: destination,
                 from: from,
-                typeOfHousing: housing,
-                numberOfPeople: numberOfPeople,
-                numberOfNights: numberOfNights
-
+                extra: extra_price,
             })
             .then(() => {
                 // setTicket_price("")
@@ -73,21 +78,13 @@ export const MainData = () => {
                     <InputText handleText={setFrom} placeholder={"Name of the city"}/>
                 </div>
                 <div className={"formElement"}>
-                    <FormLabel name={"Type of housing"}/>
-                    <InputSelect handleText={setHousing} value1={"Hotel"} value2={"Apartment"} value3={"Hostel"} value4={"Tent"}
-                                  value5={"Other"}/>
-                </div>
-                <div className={"formElement"}>
-                    <FormLabel name={"Number of people"}/>
-                    <InputNumber handleText={setNumberOfPeople} placeholder={"Type only numbers :)"}/>
-                </div>
-                <div className={"formElement"}>
-                    <FormLabel name={"How many nights?"}/>
-                    <InputNumber handleText={setNumberOfNights} placeholder={"This is for cost of housing"}/>
+                    <FormLabel name={"Any extra fees"}/>
+                    <InputNumber handleText={setExtra_price} placeholder={"Type here sum of all extra fees"}/>
                 </div>
                 <div className={"formElement checkbox"}>
                     <InputCheckbox name={"I would like to add attractions"}/>
                 </div>
+
 
                 {/*<Link to={checked"/Attractions"} className={"buttons"}>*/}
                 <Link to={check ? "/Attractions" : "/MyJourneys"}>

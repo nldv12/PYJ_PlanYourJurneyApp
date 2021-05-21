@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./MainCOMPONENTS.scss"
-// import {db} from "../../firebase";
-import firebase from "../../firebase";
+import {db} from "../../firebase";
+// import firebase from "../../firebase";
 
 
 // inputs
@@ -50,11 +50,7 @@ export const InputSelect = ({value1, value2, value3, value4, value5, handleText}
 
     )
 }
-
-
 // end inputs
-
-
 export const FormLabel = ({name}) => {
 
     return (
@@ -64,39 +60,31 @@ export const FormLabel = ({name}) => {
 
     )
 }
+
 export const TotalPrice = ({name}) => {
-    const [totalPrice, setTotalPrice] = useState('');
+    const [totalPrice, setTotalPrice] = useState([]);
 
     useEffect(() => {
-    firebase
-        .firestore()
-        .collection('jr2')
-        .onSnapshot(snapshot => {
-            const newPrice = snapshot.docs.map((doc) =>({
-                id: doc.id,
-                ...doc.data()
-            }))
-            let newTotal = parseFloat(newPrice[0].SumPrice) * parseFloat(newPrice[1].numberOfPeople) ;
+        const fetchData = async () => {
+            const allData = await db.collection('jr1').get()
+            const data = allData.docs.map(doc => doc.data())
+            //variables
+            const ticket = data.map(total => total.ticket);
+            const extra = data.map(total => total.extra);
+            const sumPrice = data.map(total => total.sumPrice);
+            const housingSumPrice = data.map(total => total.housingSumPrice);
+            const tripTotalPrice = parseFloat(extra) + parseFloat(sumPrice) + parseFloat(ticket) + parseFloat(housingSumPrice);
+            setTotalPrice(tripTotalPrice)
+        }
+        fetchData()
 
-            setTotalPrice(newTotal)
-        })
 }, []);
-
-
-    console.log(totalPrice)
-
-    // let result =
-
-    // console.log(totalPrice[0].distance)
-    // {totalPrice.map((jr) => <div key={jr.id}>{jr.extra_price}</div>)}
-
-
 
 
 
     return (
         <>
-            <div className={"totalPrice"}>Total Price: 3000</div>
+            <button key={"1"} className={"totalPrice"}>Total Price: {totalPrice}</button>
         </>
 
     )

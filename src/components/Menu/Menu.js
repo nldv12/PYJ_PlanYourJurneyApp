@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./Menu.scss"
 import {Link} from "react-router-dom";
-import {NewJourney} from "../NewJourney/NewJourney";
+// import {NewJourney} from "../NewJourney/NewJourney";
 
 
 // import {InputNumber, InputCheckbox, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";

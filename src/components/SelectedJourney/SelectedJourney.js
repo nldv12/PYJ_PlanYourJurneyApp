@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from "react";
 import "./SelectedJourney.scss"
-import {InputNumber, InputCheckbox, InputSelect5} from "../MainCOMPONENTS/MainCOMPONENTS";
-import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
-import {TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
-import {Link, useParams} from "react-router-dom";
+// import {InputNumber, InputCheckbox, InputSelect5} from "../MainCOMPONENTS/MainCOMPONENTS";
+// import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
+// import {TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
+// import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {db} from "../../firebase";
-import firebase from "../../firebase";
+// import firebase from "../../firebase";
 
 
 export const SelectedJourney = () => {
-    const {id} = useParams();
+    // const {id} = useParams();
     const [journeys, setJourneys] = useState([]);
 
     // useEffect(() => {
@@ -27,7 +28,7 @@ export const SelectedJourney = () => {
 
 
     useEffect(() => {
-        console.log(id);
+        // console.log(id);
 
         db.collection(`journeys`)
             .get()
@@ -45,7 +46,7 @@ export const SelectedJourney = () => {
             });
 
     }, []);
-    {journeys.map((jr) => <div key={jr.id}>{jr.extra_price}</div>)}
+    // {journeys.map((jr) => <div key={jr.id}>{jr.extra_price}</div>)}
 
     return (
 

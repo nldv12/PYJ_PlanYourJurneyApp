@@ -1,44 +1,62 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./IfCar.scss"
 import {InputNumber, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
-import firebase from "../../firebase";
+import firebase, {db} from "../../firebase";
 
 
 export const IfCar = () => {
-    const [distance, setDistance] = useState("");
-    const [litres, setLitres] = useState("");
-    const [pricePerLitre, setPricePerLitre] = useState("");
-    const [housing_price, setHousing_price] = useState("");
-    const [food_price, setFood_price] = useState("");
-    const [extra_price, setExtra_price] = useState("");
+    const [distance, setDistance] = useState("0");
+    const [litres, setLitres] = useState("0");
+    const [pricePerLitre, setPricePerLitre] = useState("0");
+    const [numberOfPeople, setNumberOfPeople] = useState("0");
+    const [food_price, setFood_price] = useState("0");
+
+    const [prevState, setPrevState] = useState("0");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const allData = await db.collection('jr1').get()
+            const data = allData.docs.map(doc => doc.data())
+            setPrevState(...data)
+        }
+        fetchData()
+    }, []);
+
+
+
 
 
     let pricePerkm = (parseFloat(litres) / 100) * parseFloat(pricePerLitre)
     let fuelPrice =  pricePerkm * parseFloat(distance)
 
 
-    let carSumPrice = fuelPrice + parseFloat(housing_price) + parseFloat(food_price) + parseFloat(extra_price)
+    let carSumPrice = fuelPrice  + parseFloat(food_price) * parseFloat(numberOfPeople)
+    console.log(`Cena za paliwo: ${fuelPrice}`)
+    console.log(`Cena paliwo + Jedzenie: ${carSumPrice}`)
 
     const handleClick = (e) => {
         firebase
             .firestore()
-            .collection(`jr2`)
-            .add({
+            .collection(`jr1`)
+            .doc("1")
+            .set({
+                ...prevState,
                 distance: distance,
-                litres: litres,
+                litres_per_hundred_km: litres,
                 pricePerLitre: pricePerLitre,
+                numberOfPeople: numberOfPeople,
                 fuelPrice: fuelPrice,
-                housing_price: housing_price,
                 food_price: food_price,
-                extra_price: extra_price,
-                SumPrice: carSumPrice,
-                typeOFtransport: "car"
+                sumPrice: carSumPrice,
+                typeOFtransport: "car",
+                ticket: 0,
+                housingSumPrice: 0,
+                extra: 0
+
             })
-            .then(() => {
-                // setTicket_price("")
-            })
+
 
         // console.log(`distance in km:  ${distance}`)
         // console.log(`l/100km:  ${litres}`)
@@ -54,7 +72,7 @@ export const IfCar = () => {
 
     return (
         <div className={"IfCar"}>
-            <TotalPrice/>
+            <button  className={"totalPrice"}>Total Price: {carSumPrice} </button>
             <div className={"form"}>
                 <p>CAR</p>
                 <div className={"formElement"}>
@@ -70,18 +88,15 @@ export const IfCar = () => {
                     <InputNumber handleText={setPricePerLitre} placeholder={"for example 4.50"}/>
                 </div>
                 <div className={"formElement"}>
-                    <FormLabel name={"Price for housing"}/>
-                    <InputNumber handleText={setHousing_price} placeholder={"Price for 1 person per 1 night"}/>
+                    <FormLabel name={"Number of people"}/>
+                    <InputNumber handleText={setNumberOfPeople} placeholder={"Type only numbers :)"}/>
                 </div>
                 <div className={"formElement"}>
                     <FormLabel name={"Price for food"}/>
                     <InputNumber handleText={setFood_price} placeholder={"Price for 1 person for 1 day"}/>
                 </div>
-                <div className={"formElement"}>
-                    <FormLabel name={"Any extra fees"}/>
-                    <InputNumber handleText={setExtra_price} placeholder={"Type here sum of all extra fees"}/>
-                </div>
-                <Link to="/MainData">
+
+                <Link to="/Housing">
                     <button onClick={handleClick} className={"btn"}>Next</button>
                 </Link>
                 <p>CAR</p>
