@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import "./IfPlane.scss"
-import {InputNumber, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
+import {InputNumber} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
 import firebase, {db} from "../../firebase";
+import name_of_collection from "../../App"
+import number_of_document from "../../App"
 
 
 export const IfPlane = () => {
@@ -15,7 +17,7 @@ export const IfPlane = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection('jr1').get()
+            const allData = await db.collection(name_of_collection).get()
             const data = allData.docs.map(doc => doc.data())
 
             setPrevState(...data)
@@ -30,15 +32,14 @@ export const IfPlane = () => {
     let planeSumPrice = (parseFloat(ticket_price) + parseFloat(food_price)) * parseFloat(numberOfPeople)
     // let planeSumPrice = (parseFloat((ticket_price === undefined) ? 0 : ticket_price) + parseFloat(food_price)) * parseFloat(numberOfPeople)
 
-    console.log(`Cena całkowita: ${planeSumPrice}`)
 
     const handleClick = (e) => {
 
 
         firebase
             .firestore()
-            .collection(`jr1`)
-            .doc("1")
+            .collection(name_of_collection)
+            .doc(number_of_document)
             .set({
                 ...prevState,
                 ticket: ticket_price,
@@ -47,7 +48,7 @@ export const IfPlane = () => {
                 sumPrice: planeSumPrice,
                 housingSumPrice: 0,
                 extra: 0,
-                typeOFtransport: "plane"
+                typeOFtransport: "Plane"
             })
 
 

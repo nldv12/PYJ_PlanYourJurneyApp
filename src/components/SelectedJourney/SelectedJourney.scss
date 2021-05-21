@@ -7,6 +7,7 @@
   justify-content: center;
   align-items: center;
   .selected_container {
+    width: 332px;
     background: white;
     margin: 10px;
     padding: 15px 15px 15px 15px;
@@ -98,8 +99,20 @@
   .single_element {
     margin: 10px 0;
     display: flex;
+    gap: 10px;
     justify-content: center;
     align-items: center;
+    .two_icons {
+      width: 150px;
+      display: flex;
+      flex-direction: column;
+      .picto {
+        position: fixed;
+        left: 150px;
+        top: 80px;
+      }
+
+    }
 
     .price,
     .days,

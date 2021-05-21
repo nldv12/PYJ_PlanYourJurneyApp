@@ -15,6 +15,8 @@ import {Attractions} from "./components/Attractions/Attractions";
 import {MyJourneys} from "./components/MyJourneys/MyJourneys";
 import {SelectedJourney} from "./components/SelectedJourney/SelectedJourney";
 
+export const number_of_document = "1";
+export const name_of_collection = `Jr1`;
 
 
 function App() {

@@ -4,6 +4,8 @@ import {InputNumber, InputText} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
 import firebase, {db} from "../../firebase";
+import name_of_collection from "../../App"
+import number_of_document from "../../App"
 
 
 export const MainData = () => {
@@ -17,7 +19,7 @@ export const MainData = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection('jr1').get()
+            const allData = await db.collection(name_of_collection).get()
             const data = allData.docs.map(doc => doc.data())
             setPrevState(...data)
         }
@@ -28,8 +30,8 @@ export const MainData = () => {
     const handleClick = (e) => {
         firebase
             .firestore()
-            .collection(`jr1`)
-            .doc("1")
+            .collection(name_of_collection)
+            .doc(number_of_document)
             .set({
                 ...prevState,
                 destination: destination,

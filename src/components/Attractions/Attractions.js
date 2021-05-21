@@ -5,7 +5,6 @@ import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
 
-
 export const Attractions = () => {
 
 

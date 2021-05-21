@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import "./MainCOMPONENTS.scss"
 import {db} from "../../firebase";
 // import firebase from "../../firebase";
+import name_of_collection from "../../App"
+import number_of_document from "../../App"
 
 
 // inputs
@@ -66,14 +68,12 @@ export const TotalPrice = ({name}) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection('jr1').get()
+            const allData = await db.collection(name_of_collection).get()
             const data = allData.docs.map(doc => doc.data())
             //variables
-            const ticket = data.map(total => total.ticket);
             const extra = data.map(total => total.extra);
-            const sumPrice = data.map(total => total.sumPrice);
             const housingSumPrice = data.map(total => total.housingSumPrice);
-            const tripTotalPrice = parseFloat(extra) + parseFloat(sumPrice) + parseFloat(ticket) + parseFloat(housingSumPrice);
+            const tripTotalPrice = parseFloat(extra) + parseFloat(housingSumPrice);
             setTotalPrice(tripTotalPrice)
         }
         fetchData()
@@ -84,7 +84,7 @@ export const TotalPrice = ({name}) => {
 
     return (
         <>
-            <button key={"1"} className={"totalPrice"}>Total Price: {totalPrice}</button>
+            <button key={number_of_document} className={"totalPrice"}>Total Price: {totalPrice}</button>
         </>
 
     )

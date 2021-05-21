@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import "./IfCar.scss"
-import {InputNumber, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
+import {InputNumber} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
 import firebase, {db} from "../../firebase";
+import name_of_collection from "../../App"
+import number_of_document from "../../App"
 
 
 export const IfCar = () => {
@@ -17,7 +19,7 @@ export const IfCar = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection('jr1').get()
+            const allData = await db.collection(name_of_collection).get()
             const data = allData.docs.map(doc => doc.data())
             setPrevState(...data)
         }
@@ -33,14 +35,12 @@ export const IfCar = () => {
 
 
     let carSumPrice = fuelPrice  + parseFloat(food_price) * parseFloat(numberOfPeople)
-    console.log(`Cena za paliwo: ${fuelPrice}`)
-    console.log(`Cena paliwo + Jedzenie: ${carSumPrice}`)
 
     const handleClick = (e) => {
         firebase
             .firestore()
-            .collection(`jr1`)
-            .doc("1")
+            .collection(name_of_collection)
+            .doc(number_of_document)
             .set({
                 ...prevState,
                 distance: distance,
@@ -50,7 +50,7 @@ export const IfCar = () => {
                 fuelPrice: fuelPrice,
                 food_price: food_price,
                 sumPrice: carSumPrice,
-                typeOFtransport: "car",
+                typeOFtransport: "Car",
                 ticket: 0,
                 housingSumPrice: 0,
                 extra: 0

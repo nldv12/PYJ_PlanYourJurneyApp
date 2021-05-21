@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import "./Housing.scss"
-import {InputNumber, InputSelect, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
+import {InputNumber, InputSelect} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
 import firebase, {db} from "../../firebase";
+import number_of_document from "../../App"
+import name_of_collection from "../../App"
 
 
 
@@ -20,22 +22,22 @@ export const Housing = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection('jr1').get()
+            const allData = await db.collection(name_of_collection).get()
             const data = allData.docs.map(doc => doc.data())
             setPrevState(...data)
         }
         fetchData()
     }, []);
 
-    let housingSumPrice = parseFloat(numberOfNights) * parseFloat(housing_price) * parseFloat(prevState.numberOfPeople)
+    let housingSumPrice = parseFloat(numberOfNights) * parseFloat(housing_price) * parseFloat(prevState.numberOfPeople) + parseFloat(prevState.sumPrice)
 
     // console.log(`Cena za całe nocowanie dla wszystkich: ${housingSumPrice}`)
 
     const handleClick = (e) => {
         firebase
             .firestore()
-            .collection(`jr1`)
-            .doc("1")
+            .collection(name_of_collection)
+            .doc(number_of_document)
             .set({
                 ...prevState,
                 typeOfHousing: housing,
@@ -51,7 +53,7 @@ export const Housing = () => {
 
     return (
         <div className={"Housing"}>
-            <TotalPrice/>
+            <button  className={"totalPrice"}>Total Price: {housingSumPrice} </button>
             <div className={"form"}>
                 <p>Housing</p>
                 <div className={"formElement"}>
