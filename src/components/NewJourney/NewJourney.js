@@ -1,8 +1,8 @@
 import React from "react";
-import "./MainPage.scss"
+import "./NewJourney.scss"
 import {Link} from "react-router-dom";
 
-export const MainPage = () => {
+export const NewJourney = () => {
 
 
     return (

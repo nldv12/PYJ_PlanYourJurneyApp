@@ -1,6 +1,6 @@
 import React  from "react";
 import "./Attractions.scss"
-import {InputNumber, InputCheckbox, InputSelect5} from "../MainCOMPONENTS/MainCOMPONENTS";
+import {InputNumber, InputSelect} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
@@ -16,7 +16,7 @@ export const Attractions = () => {
                 <p>ATTRACTIONS</p>
                 <div className={"formElement"}>
                     <FormLabel name={"Type of activity"}/>
-                    <InputSelect5 value1={"Excursion"}  value2={"Bungee Jumping"}  value3={"Waterpark"}  value4={"Museum"}  value5={"Other"}/>
+                    <InputSelect value1={"Excursion"}  value2={"Bungee Jumping"}  value3={"Waterpark"}  value4={"Museum"}  value5={"Other"}/>
                 </div>
                 <div className={"formElement"}>
                     <FormLabel name={"Number of people"}/>
