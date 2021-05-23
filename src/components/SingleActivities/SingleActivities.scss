@@ -1,0 +1,81 @@
+@import "../variables";
+
+.totalPrice {
+  margin-top: 18px;
+  margin-left: 67px;
+}
+
+.SingleActivities {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+
+    .content {
+      width: 250px;
+      background: #05a733;
+      padding: 15px 15px 15px 15px;
+      border-radius: 10px;
+      line-height: 30px;
+      transition: 0.3s;
+      color: white;
+      font-size: 18px;
+      letter-spacing: 1px;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .picto_bin {
+      margin-left: 10px;
+      border-radius: 10px;
+      background-color: white;
+      background-image: url("../../images/delete.svg");
+      width: 56px;
+      height: 56px;
+      transition: 0.3s;
+
+    }
+    .picto_bin:active {
+      transform: scale(0.9);
+    }
+
+    .picto_update {
+      background-image: url("../../images/update.svg");
+      height: 25px;
+      width: 25px;
+      color: white;
+      margin-right: 5px;
+    }
+    .picto_person {
+      margin-right: 5px;
+      display: block;
+      background-image: url("../../images/person.svg");
+      height: 30px;
+      width: 30px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+  }
+
+
+
+}
+
+

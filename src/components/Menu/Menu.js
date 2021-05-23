@@ -32,13 +32,13 @@ export const Menu = () => {
                     <nav className={burger ? "hideNavbar" : "showNavbar"}>
 
                         <ul className={"nav-list"}>
-                            <li className={"nav-item"}>
+                            <li className={"nav_item"}>
                                 <Link onClick={handleClick} to="/" className={"nav-link"}>Home</Link>
                             </li>
-                            <li className={"nav-item"}>
+                            <li className={"nav_item"}>
                                 <Link onClick={handleClick} to="/NewJourney" className={"nav-link"}>Plan new Journey</Link>
                             </li>
-                            <li className={"nav-item"}>
+                            <li className={"nav_item"}>
                                 <Link onClick={handleClick} to="/MyJourneys" className={"nav-link"}>My Journeys</Link>
                             </li>
                             {/*<li className={"nav-item"}>*/}

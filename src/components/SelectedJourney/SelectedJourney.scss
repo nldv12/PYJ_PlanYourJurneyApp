@@ -19,12 +19,32 @@
     letter-spacing: 1px;
     font-weight: 500;
   }
+  .picto {
+    top: 0;
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 
+  .picto_car {
+    background-image: url("../../images/car.svg");
+  }
+
+  .picto_bus {
+    background-image: url("../../images/bus.svg");
+  }
+
+  .picto_plane {
+    background-image: url("../../images/plane.svg");
+  }
 
   .picto_distance {
     background-image: url("../../images/distance.svg");
-    height: 60px;
-    width: 150px;
+    height: 56px;
+    width: 240px;
     background-size: contain;
     background-repeat: no-repeat;
   }
@@ -38,40 +58,6 @@
     background-size: contain;
     background-repeat: no-repeat;
   }
-
-  .picto_car {
-    position: fixed;
-    left: 170px;
-    display: block;
-    background-image: url("../../images/car.svg");
-    height: 30px;
-    width: 30px;
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-
-  .picto_bus {
-    position: fixed;
-    left: 170px;
-    display: block;
-    background-image: url("../../images/bus.svg");
-    height: 30px;
-    width: 30px;
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-
-  .picto_plane {
-    position: fixed;
-    left: 170px;
-    display: block;
-    background-image: url("../../images/plane.svg");
-    height: 30px;
-    width: 30px;
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-
   .picto_person {
     margin-right: 10px;
     display: block;
@@ -81,7 +67,6 @@
     background-size: contain;
     background-repeat: no-repeat;
   }
-
   .picto_day {
     margin-right: 10px;
     display: block;
@@ -95,33 +80,39 @@
     display: flex;
     justify-content: space-between;
   }
-
   .single_element {
-    margin: 10px 0;
     display: flex;
-    gap: 10px;
     justify-content: center;
     align-items: center;
-    .two_icons {
-      width: 150px;
-      display: flex;
-      flex-direction: column;
-      .picto {
-        position: fixed;
-        left: 150px;
-        top: 80px;
-      }
-
     }
-
+  .second {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .third {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+    margin-bottom: 15px;
+    text-align: center;
+    .from {
+      //background: #47b8e0;
+      width: 120px;
+    }
+    .destination {
+      //background: #db47e0;
+      width: 120px;
+    }
+  }
     .price,
     .days,
     .person {
       font-size: 24px;
     }
-
   }
 
-}
 
 

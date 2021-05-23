@@ -2,9 +2,6 @@ import React, {useEffect, useState} from "react";
 import "./MainCOMPONENTS.scss"
 import {db} from "../../firebase";
 // import firebase from "../../firebase";
-import name_of_collection from "../../App"
-import number_of_document from "../../App"
-
 
 // inputs
 export const InputText = ({placeholder, handleText}) => {
@@ -63,28 +60,11 @@ export const FormLabel = ({name}) => {
     )
 }
 
-export const TotalPrice = ({name}) => {
-    const [totalPrice, setTotalPrice] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const allData = await db.collection(name_of_collection).get()
-            const data = allData.docs.map(doc => doc.data())
-            //variables
-            const extra = data.map(total => total.extra);
-            const housingSumPrice = data.map(total => total.housingSumPrice);
-            const tripTotalPrice = parseFloat(extra) + parseFloat(housingSumPrice);
-            setTotalPrice(tripTotalPrice)
-        }
-        fetchData()
-
-}, []);
-
-
+export const TotalPrice = ({value}) => {
 
     return (
         <>
-            <button key={number_of_document} className={"totalPrice"}>Total Price: {totalPrice}</button>
+            <button key={"1"} className={"totalPrice"}>Total Price: {value}</button>
         </>
 
     )

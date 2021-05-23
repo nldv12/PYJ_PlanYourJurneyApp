@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from "react";
 import "./IfCar.scss"
-import {InputNumber} from "../MainCOMPONENTS/MainCOMPONENTS";
+import {InputNumber, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
 import firebase, {db} from "../../firebase";
-import name_of_collection from "../../App"
-import number_of_document from "../../App"
 
 
 export const IfCar = () => {
@@ -19,7 +17,7 @@ export const IfCar = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection(name_of_collection).get()
+            const allData = await db.collection(`Jr1`).get()
             const data = allData.docs.map(doc => doc.data())
             setPrevState(...data)
         }
@@ -39,8 +37,8 @@ export const IfCar = () => {
     const handleClick = (e) => {
         firebase
             .firestore()
-            .collection(name_of_collection)
-            .doc(number_of_document)
+            .collection(`Jr1`)
+            .doc("1")
             .set({
                 ...prevState,
                 distance: distance,
@@ -56,50 +54,39 @@ export const IfCar = () => {
                 extra: 0
 
             })
-
-
-        // console.log(`distance in km:  ${distance}`)
-        // console.log(`l/100km:  ${litres}`)
-        // console.log(`Price for 1 l:  ${pricePerLitre}`)
-        // console.log(`Fuel Price:  ${fuelPrice}`)
-        // console.log(`housing price:  ${housing_price}`)
-        // console.log(`food price:  ${food_price}`)
-        // console.log(`extra price:  ${extra_price}`)
-        // console.log(`FULL:  ${carSumPrice}`)
-
     }
 
 
     return (
         <div className={"IfCar"}>
-            <button  className={"totalPrice"}>Total Price: {carSumPrice} </button>
+            <TotalPrice value={carSumPrice} />
             <div className={"form"}>
-                <p>CAR</p>
+                {/*<p>CAR</p>*/}
                 <div className={"formElement"}>
                     <FormLabel name={"Distance"}/>
-                    <InputNumber handleText={setDistance} placeholder={"How many km to the Destination"}/>
+                    <InputNumber handleText={setDistance} placeholder={"Kilometers to destination "}/>
                 </div>
                 <div className={"formElement"}>
                     <FormLabel name={"Fuel consumption"}/>
                     <InputNumber handleText={setLitres} placeholder={"average L/100km"}/>
                 </div>
                 <div className={"formElement"}>
-                    <FormLabel name={"Price for 1L of fuel"}/>
-                    <InputNumber handleText={setPricePerLitre} placeholder={"for example 4.50"}/>
+                    <FormLabel name={"Fuel cost per 1L"}/>
+                    <InputNumber handleText={setPricePerLitre} placeholder={"For example: 4.50"}/>
                 </div>
                 <div className={"formElement"}>
                     <FormLabel name={"Number of people"}/>
-                    <InputNumber handleText={setNumberOfPeople} placeholder={"Type only numbers :)"}/>
+                    <InputNumber handleText={setNumberOfPeople} placeholder={"For example: 3"}/>
                 </div>
                 <div className={"formElement"}>
-                    <FormLabel name={"Price for food"}/>
-                    <InputNumber handleText={setFood_price} placeholder={"Price for 1 person for 1 day"}/>
+                    <FormLabel name={"Food price"}/>
+                    <InputNumber handleText={setFood_price} placeholder={"Price for 1 person per 1 day"}/>
                 </div>
 
                 <Link to="/Housing">
                     <button onClick={handleClick} className={"btn"}>Next</button>
                 </Link>
-                <p>CAR</p>
+                {/*<p>CAR</p>*/}
             </div>
 
         </div>

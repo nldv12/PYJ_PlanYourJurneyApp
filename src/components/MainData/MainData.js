@@ -1,40 +1,40 @@
 import React, {useEffect, useState} from "react";
 import "./MainData.scss"
-import {InputNumber, InputText} from "../MainCOMPONENTS/MainCOMPONENTS";
+import {InputNumber, InputText, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
 import firebase, {db} from "../../firebase";
-import name_of_collection from "../../App"
-import number_of_document from "../../App"
+
 
 
 export const MainData = () => {
     const [destination, setDestination] = useState("");
     const [from, setFrom] = useState("");
     const [extra_price, setExtra_price] = useState("0");
-
     const [check, setCheck] = useState(false);
-
     const [prevState, setPrevState] = useState("0");
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection(name_of_collection).get()
+            const allData = await db.collection(`Jr1`).get()
             const data = allData.docs.map(doc => doc.data())
             setPrevState(...data)
         }
         fetchData()
     }, []);
 
+    let extraSumPrice = parseFloat(extra_price) + parseFloat(prevState.housingSumPrice)
+
 
     const handleClick = (e) => {
         firebase
             .firestore()
-            .collection(name_of_collection)
-            .doc(number_of_document)
+            .collection(`Jr1`)
+            .doc("1")
             .set({
                 ...prevState,
                 destination: destination,
+                extraSumPrice: extraSumPrice,
                 from: from,
                 extra: extra_price,
             })
@@ -68,8 +68,7 @@ export const MainData = () => {
 
     return (
         <div className={"MainData"}>
-            <div className={"title"}>Answer following questions</div>
-
+            <TotalPrice value={extraSumPrice} />
             <div className={"form"}>
                 <div className={"formElement"}>
                     <FormLabel name={"Destination"}/>
@@ -84,12 +83,12 @@ export const MainData = () => {
                     <InputNumber handleText={setExtra_price} placeholder={"Type here sum of all extra fees"}/>
                 </div>
                 <div className={"formElement checkbox"}>
-                    <InputCheckbox name={"I would like to add attractions"}/>
+                    <InputCheckbox name={"I would like to add activities"}/>
                 </div>
 
 
-                {/*<Link to={checked"/Attractions"} className={"buttons"}>*/}
-                <Link to={check ? "/Attractions" : "/MyJourneys"}>
+                {/*<Link to={checked"/Activities"} className={"buttons"}>*/}
+                <Link to={check ? "/Activities" : "/MyJourneys"}>
                     <button onClick={handleClick} className={"btn"}>Next</button>
                 </Link>
             </div>

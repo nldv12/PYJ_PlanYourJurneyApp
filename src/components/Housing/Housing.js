@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from "react";
 import "./Housing.scss"
-import {InputNumber, InputSelect} from "../MainCOMPONENTS/MainCOMPONENTS";
+import {InputNumber, InputSelect, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
 import firebase, {db} from "../../firebase";
-import number_of_document from "../../App"
-import name_of_collection from "../../App"
 
-
+// TODO: zrób :co jeśli wynajem apartamentu:
 
 
 
@@ -22,7 +20,7 @@ export const Housing = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection(name_of_collection).get()
+            const allData = await db.collection(`Jr1`).get()
             const data = allData.docs.map(doc => doc.data())
             setPrevState(...data)
         }
@@ -36,8 +34,8 @@ export const Housing = () => {
     const handleClick = (e) => {
         firebase
             .firestore()
-            .collection(name_of_collection)
-            .doc(number_of_document)
+            .collection(`Jr1`)
+            .doc("1")
             .set({
                 ...prevState,
                 typeOfHousing: housing,
@@ -53,20 +51,20 @@ export const Housing = () => {
 
     return (
         <div className={"Housing"}>
-            <button  className={"totalPrice"}>Total Price: {housingSumPrice} </button>
+            <TotalPrice value={housingSumPrice} />
             <div className={"form"}>
                 <p>Housing</p>
                 <div className={"formElement"}>
-                    <FormLabel name={"Type of housing"}/>
-                    <InputSelect handleText={setHousing} value1={"Hotel"} value2={"Apartment"} value3={"Hostel"} value4={"Tent"}
+                    <FormLabel name={"Type of accommodation"}/>
+                    <InputSelect handleText={setHousing} value1={"Apartment"} value2={"Hotel"} value3={"Hostel"} value4={"Camping"}
                                  value5={"Other"}/>
                 </div>
                 <div className={"formElement"}>
-                    <FormLabel name={"How many nights?"}/>
-                    <InputNumber handleText={setNumberOfNights} placeholder={"This is for cost of housing"}/>
+                    <FormLabel name={"Number of nights?"}/>
+                    <InputNumber handleText={setNumberOfNights} placeholder={"For example: 4"}/>
                 </div>
                 <div className={"formElement"}>
-                    <FormLabel name={"Price for housing"}/>
+                    <FormLabel name={"Price of accommodation"}/>
                     <InputNumber handleText={setHousing_price} placeholder={"Price for 1 person per 1 night"}/>
                 </div>
                 <Link to="/MainData">

@@ -85,7 +85,6 @@
 .btn {
   margin: 0 10px;
   background: $myPurple;
-  font-family: "Roboto", "sans-serif";
   font-weight: 500;
   font-size: 19px;
   color: white;
@@ -101,15 +100,15 @@
   text-align: center;
 }
 
-.btn_small {
+.btn_blue {
+  text-transform: uppercase;
+  font-size: 18px;
   background: $myBlue;
-  width: 200px;
+  width: 218px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  font-family: "Roboto", "sans-serif";
 }
 .btn:active {
   transform: scale(0.9);

@@ -11,12 +11,12 @@ import {Housing} from "./components/Housing/Housing";
 import {IfCar} from "./components/IfCar/IfCar";
 import {IfBus} from "./components/IfBus/IfBus";
 import {IfPlane} from "./components/IfPlane/IfPlane";
-import {Attractions} from "./components/Attractions/Attractions";
+import {Activities} from "./components/Activities/Activities";
 import {MyJourneys} from "./components/MyJourneys/MyJourneys";
 import {SelectedJourney} from "./components/SelectedJourney/SelectedJourney";
+import {SingleActivities} from "./components/SingleActivities/SingleActivities";
 
-export const number_of_document = "1";
-export const name_of_collection = `Jr1`;
+
 
 
 function App() {
@@ -32,9 +32,11 @@ function App() {
                 <Route path="/Plane" component={IfPlane}/>
                 <Route path="/Car" component={IfCar}/>
                 <Route path="/Bus" component={IfBus}/>
-                <Route path="/Attractions" component={Attractions}/>
+                <Route path="/Activities" component={Activities}/>
                 <Route path="/MyJourneys" component={MyJourneys}/>
                 <Route path="/SelectedJourney/:id" component={SelectedJourney}/>
+                <Route path="/SingleActivities/:id" component={SingleActivities}/>
+                <Route path="/singleHousing/:id" component={NewJourney}/>
             </Switch>
 
 
