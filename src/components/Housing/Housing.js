@@ -5,55 +5,51 @@ import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
 import firebase, {db} from "../../firebase";
 
-// TODO: zrób :co jeśli wynajem apartamentu:
+// TODO: what if full price
 
 
 
 export const Housing = () => {
-    const [housing, setHousing] = useState("Hotel");
+    const [housing, setHousing] = useState("Apartment");
     const [numberOfNights, setNumberOfNights] = useState("0");
     const [housing_price, setHousing_price] = useState("0");
 
     const [prevState, setPrevState] = useState("0");
-
-
-
+    console.log(prevState.numberOfPeople)
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection(`Jr1`).get()
+            const allData = await db.collection(`Journeys`).get()
             const data = allData.docs.map(doc => doc.data())
             setPrevState(...data)
         }
         fetchData()
     }, []);
 
-    let housingSumPrice = parseFloat(numberOfNights) * parseFloat(housing_price) * parseFloat(prevState.numberOfPeople) + parseFloat(prevState.sumPrice)
-
-    // console.log(`Cena za całe nocowanie dla wszystkich: ${housingSumPrice}`)
+    let housingSumPrice = parseFloat(numberOfNights) * parseFloat(housing_price) * parseFloat(prevState.numberOfPeople)
+    let totalTripPrice = parseFloat(prevState.sumPrice) + housingSumPrice
 
     const handleClick = (e) => {
         firebase
             .firestore()
-            .collection(`Jr1`)
-            .doc("1")
+            .collection(`Journeys`)
+            .doc(localStorage.getItem("journey_id"))
             .set({
                 ...prevState,
+                totalTripPrice: totalTripPrice,
                 typeOfHousing: housing,
                 numberOfNights: numberOfNights,
                 housingSumPrice: housingSumPrice,
                 one_person_one_night_housing_price: housing_price,
             })
-            .then(() => {
-                // setTicket_price("")
-            })
+
 
     }
 
     return (
         <div className={"Housing"}>
-            <TotalPrice value={housingSumPrice} />
+            <TotalPrice value={totalTripPrice} />
             <div className={"form"}>
-                <p>Housing</p>
+                {/*<p>Housing</p>*/}
                 <div className={"formElement"}>
                     <FormLabel name={"Type of accommodation"}/>
                     <InputSelect handleText={setHousing} value1={"Apartment"} value2={"Hotel"} value3={"Hostel"} value4={"Camping"}
@@ -70,7 +66,7 @@ export const Housing = () => {
                 <Link to="/MainData">
                     <button onClick={handleClick} className={"btn"}>Next</button>
                 </Link>
-                <p>Housing</p>
+                {/*<p>Housing</p>*/}
             </div>
 
         </div>

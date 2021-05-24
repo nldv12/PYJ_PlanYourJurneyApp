@@ -16,31 +16,29 @@ export const MainData = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection(`Jr1`).get()
+            const allData = await db.collection(`Journeys`).get()
             const data = allData.docs.map(doc => doc.data())
             setPrevState(...data)
         }
         fetchData()
     }, []);
 
-    let extraSumPrice = parseFloat(extra_price) + parseFloat(prevState.housingSumPrice)
+    let totalTripPrice = parseFloat(extra_price) + parseFloat(prevState.housingSumPrice) + parseFloat(prevState.sumPrice)
 
 
     const handleClick = (e) => {
         firebase
             .firestore()
-            .collection(`Jr1`)
-            .doc("1")
+            .collection(`Journeys`)
+            .doc(localStorage.getItem("journey_id"))
             .set({
                 ...prevState,
+                totalTripPrice: totalTripPrice,
                 destination: destination,
-                extraSumPrice: extraSumPrice,
                 from: from,
                 extra: extra_price,
             })
-            .then(() => {
-                // setTicket_price("")
-            })
+
 
     }
 
@@ -68,7 +66,7 @@ export const MainData = () => {
 
     return (
         <div className={"MainData"}>
-            <TotalPrice value={extraSumPrice} />
+            <TotalPrice value={totalTripPrice} />
             <div className={"form"}>
                 <div className={"formElement"}>
                     <FormLabel name={"Destination"}/>

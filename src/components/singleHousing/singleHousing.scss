@@ -1,53 +1,74 @@
 @import "../variables";
 
+//.totalPrice {
+//  margin-top: 18px;
+//  margin-left: 45px;
+//}
 
-
-.MyJourneys {
+.SingleHousing {
+  margin-top: 20px;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  .title {
-    text-align: center;
-    width: 252px;
-    color: #f8f1f1;
-    display: flex;
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    background-color: $myTomato;
-    border-radius: 5px;
-    padding: 15px;
-    text-transform: none;
-    margin-left: 14px;
-    margin-top: 19px;
-  }
-  .singleJourney {
-    display: block;
-    text-decoration: none;
-    background: white;
-    margin: 30px;
-    padding: 15px 35px 15px 35px;
-    border-radius: 30px;
-    line-height: 30px;
-    transition: 0.3s;
-  }
-  .singleJourney:active {
-    transform: scale(0.9);
-  }
 
-  .sum_Line {
+  .container {
+    margin: 10px 0;
     display: flex;
-    justify-content: space-between;
-    font-style: italic;
-    color: $myTomato;
-    font-size: 18px;
-    letter-spacing: 1px;
-    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
 
-    span {
-      color: #d96565;
-      font-weight: 600;
+    .content {
+      color: white;
+      width: 250px;
+      background: #777777;
+      padding: 15px 15px 15px 15px;
+      border-radius: 10px;
+      display: block;
+      line-height: 30px;
+
+      div {
+        display: flex;
+      }
     }
+
+    .picto_bin {
+      margin-left: 10px;
+      border-radius: 10px;
+      background-color: white;
+      background-image: url("../../images/delete.svg");
+      width: 56px;
+      height: 56px;
+      transition: 0.3s;
+
+    }
+    .picto_bin:active {
+      transform: scale(0.9);
+    }
+
+    .picto_update {
+      margin-right: 10px;
+      display: block;
+      background-image: url("../../images/day.svg");
+      height: 30px;
+      width: 30px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .picto_person {
+      margin-right: 5px;
+      display: block;
+      background-image: url("../../images/person_price.svg");
+      height: 30px;
+      width: 30px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
   }
+
+
 
 }
 

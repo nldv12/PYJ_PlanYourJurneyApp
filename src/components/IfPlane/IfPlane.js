@@ -10,35 +10,18 @@ export const IfPlane = () => {
     const [ticket_price, setTicket_price] = useState("0");
     const [numberOfPeople, setNumberOfPeople] = useState("0");
     const [food_price, setFood_price] = useState("0");
-    const [prevState, setPrevState] = useState("0");
-
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const allData = await db.collection(`Jr1`).get()
-            const data = allData.docs.map(doc => doc.data())
-
-            setPrevState(...data)
-
-        }
-        fetchData()
-
-
-    }, []);
 
 
     let planeSumPrice = (parseFloat(ticket_price) + parseFloat(food_price)) * parseFloat(numberOfPeople)
-    // let planeSumPrice = (parseFloat((ticket_price === undefined) ? 0 : ticket_price) + parseFloat(food_price)) * parseFloat(numberOfPeople)
 
 
     const handleClick = (e) => {
 
         firebase
             .firestore()
-            .collection(`Jr1`)
-            .doc("1")
-            .set({
-                ...prevState,
+            .collection(`Journeys`)
+            .add({
+                totalTripPrice: planeSumPrice,
                 ticket: ticket_price,
                 numberOfPeople: numberOfPeople,
                 food: food_price,
@@ -46,7 +29,9 @@ export const IfPlane = () => {
                 housingSumPrice: 0,
                 extra: 0,
                 typeOFtransport: "Plane"
-            })
+            }).then((doc) => {
+            localStorage.setItem("journey_id", doc.id)
+        })
     }
 
     return (
@@ -54,7 +39,6 @@ export const IfPlane = () => {
             <TotalPrice value={planeSumPrice} />
 
             <div className={"form"}>
-                <p>PLANE</p>
                 <div className={"formElement"}>
                     <FormLabel name={"Ticket Price"}/>
                     <InputNumber handleText={setTicket_price} placeholder={"Price of one return ticket"}/>
@@ -70,7 +54,6 @@ export const IfPlane = () => {
                 <Link to="/Housing">
                     <button onClick={handleClick} className={"btn"}>Next</button>
                 </Link>
-                <p>PLANE</p>
             </div>
 
         </div>

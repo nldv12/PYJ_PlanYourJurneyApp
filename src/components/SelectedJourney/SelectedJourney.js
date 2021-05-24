@@ -11,32 +11,35 @@ import {db} from "../../firebase";
 export const SelectedJourney = () => {
     // const {id} = useParams();
     const [price, setPrice] = useState([]);
+
+    const [from, setfrom] = useState("");
+    const [destination, setdestination] = useState("");
     const [numberOfPeople, setnumberOfPeople] = useState([]);
+    const [typeOFtransport, settypeOFtransport] = useState([]);
     const [numberOfNights, setnumberOfNights] = useState([]);
-    const [from, setfrom] = useState([]);
-    const [destination, setdestination] = useState([]);
-    const [typeOFtransport, settypeOFtransport] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection(`Jr1`).get()
+            const allData = await db.collection(`Journeys`).get()
             const data = allData.docs.map(doc => doc.data())
             //variables
-            const numberOfNights = data.map(total => total.numberOfNights);
             const from = data.map(total => total.from);
-            const destination = data.map(total => total.destination);
-            const numberOfPeople = data.map(total => total.numberOfPeople);
-            const typeOFtransport = data.map(total => total.typeOFtransport);
-            const extraSumPrice = data.map(total => total.extraSumPrice);
-            const singleActivitySumPrice = data.map(total => total.singleActivitySumPrice);
-
-            const tripTotalPrice = parseFloat(extraSumPrice) + parseFloat(singleActivitySumPrice);
-            setPrice(tripTotalPrice)
-            setnumberOfPeople(numberOfPeople)
             setfrom(from)
+            const destination = data.map(total => total.destination);
             setdestination(destination)
-            setnumberOfNights(numberOfNights)
+            const numberOfPeople = data.map(total => total.numberOfPeople);
+            setnumberOfPeople(numberOfPeople)
+            const typeOFtransport = data.map(total => total.typeOFtransport);
             settypeOFtransport(typeOFtransport)
+            const numberOfNights = data.map(total => total.numberOfNights);
+            setnumberOfNights(numberOfNights)
+
+            const extra = data.map(total => total.extra);
+            const housingSumPrice = data.map(total => total.housingSumPrice);
+            const sumPrice = data.map(total => total.sumPrice);
+
+            const totalTripPrice = parseFloat(extra) + parseFloat(housingSumPrice) + parseFloat(sumPrice)
+            setPrice(totalTripPrice)
         }
         fetchData()
 
@@ -73,7 +76,7 @@ export const SelectedJourney = () => {
                 </div>
             </div>
             <Link to="/SingleActivities/:id" className={"btn btn_blue"}>Check Activities</Link>
-            <Link to="/singleHousing/:id" className={"btn btn_blue"}>Check Accommodation</Link>
+            {/*<Link to="/singleHousing/:id" className={"btn btn_blue"}>Check Accommodation</Link>*/}
         </div>
 
 

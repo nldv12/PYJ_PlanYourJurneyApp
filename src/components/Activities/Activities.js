@@ -7,14 +7,14 @@ import firebase, {db} from "../../firebase";
 
 export const Activities = () => {
     const [prevState, setPrevState] = useState("0");
-    const [typeOfActivity, setTypeOfActivity] = useState("");
+    const [typeOfActivity, setTypeOfActivity] = useState("Bungee Jumping");
     const [numberOfPeopleA, setNumberOfPeopleA] = useState("1");
     const [priceForOnePersonA, setPriceForOnePersonA] = useState("0");
     const [numberOfRepetitions, setNumberOfRepetitions] = useState("1");
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection(`Jr1`).get()
+            const allData = await db.collection(`Journeys`).get()
             const data = allData.docs.map(doc => doc.data())
             setPrevState(...data)
         }
@@ -22,33 +22,35 @@ export const Activities = () => {
     }, []);
 
 
-
-    let singleActivitySumPrice = parseFloat(priceForOnePersonA) * parseFloat(numberOfPeopleA) * parseFloat(numberOfRepetitions) + parseFloat(prevState.extraSumPrice)
-
+    let singleActivitySumPrice = parseFloat(priceForOnePersonA) * parseFloat(numberOfPeopleA) * parseFloat(numberOfRepetitions)
+    let totalTripPrice = singleActivitySumPrice + parseFloat(prevState.extra) + parseFloat(prevState.housingSumPrice) + parseFloat(prevState.sumPrice)
 
     const handleClick = (e) => {
         firebase
             .firestore()
-            .collection(`Jr1`)
-            .doc("1")
-            .set({
+            .collection(`Activities`)
+            .add({
                 ...prevState,
+                totalTripPrice: totalTripPrice,
                 singleActivitySumPrice: singleActivitySumPrice,
                 typeOfActivity: typeOfActivity,
                 numberOfPeopleA: numberOfPeopleA,
                 priceForOnePersonA: priceForOnePersonA,
                 numberOfRepetitions: numberOfRepetitions
-
+            })
+            .then((doc) => {
+                localStorage.setItem("activity_id", doc.id)
             })
     }
 
-
     return (
+
         <div className={"Activities"}>
-            <TotalPrice value={singleActivitySumPrice} />
+
+            <TotalPrice value={totalTripPrice} />
 
             <div className={"form"}>
-                <p>ACTIVITIES</p>
+                {/*<p>ACTIVITIES</p>*/}
                 <div className={"formElement"}>
                     <FormLabel name={"Type of activity"}/>
                     <InputSelect handleText={setTypeOfActivity} value1={"Bungee Jumping"}  value2={"Excursion"}  value3={"Museum"}  value4={"Waterpark"}  value5={"Other"}/>
@@ -70,7 +72,7 @@ export const Activities = () => {
                     <Link to="/MyJourneys"  onClick={handleClick} className={"btn"}>Submit</Link>
                     <Link to="/MyJourneys" onSubmit={handleClick} className={"btn"}>Add one more activity!</Link>
                 </div>
-                <p>ACTIVITIES</p>
+                {/*<p>ACTIVITIES</p>*/}
             </div>
         </div>
     )

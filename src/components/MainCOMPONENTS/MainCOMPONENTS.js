@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from "react";
+// import React, {useEffect, useState} from "react";
+import React from "react";
 import "./MainCOMPONENTS.scss"
-import {db} from "../../firebase";
+// import {db} from "../../firebase";
 // import firebase from "../../firebase";
 
 // inputs
@@ -64,7 +65,7 @@ export const TotalPrice = ({value}) => {
 
     return (
         <>
-            <button key={"1"} className={"totalPrice"}>Total Price: {value}</button>
+            <button key={"1"} className={"totalPrice"}>Total Price: {value.toFixed()}</button>
         </>
 
     )

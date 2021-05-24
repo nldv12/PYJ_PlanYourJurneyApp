@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import "./SingleActivities.scss"
+import "./SingleHousing.scss"
 // import {InputNumber, InputCheckbox, InputSelect5} from "../MainCOMPONENTS/MainCOMPONENTS";
 // import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 // import {TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
@@ -8,11 +8,12 @@ import "./SingleActivities.scss"
 import firebase, {db} from "../../firebase";
 
 
-export const SingleActivities = () => {
-    const [singleActivitySumPrice, setsingleActivitySumPrice] = useState("0");
-    const [typeOfActivity, settypeOfActivity] = useState("0");
-    const [numberOfPeopleA, setnumberOfPeopleA] = useState("0");
-    const [numberOfRepetitions, setnumberOfRepetitions] = useState("0");
+export const SingleHousingp = () => {
+    // const {id} = useParams();
+    const [typeOfHousing, settypeOfHousing] = useState("0");
+    const [numberOfNights, setnumberOfNights] = useState("0");
+    const [housingSumPrice, sethousingSumPrice] = useState("0");
+    const [onePersonOneNight, setonePersonOneNight] = useState("0");
 
 
 
@@ -20,14 +21,14 @@ export const SingleActivities = () => {
         const fetchData = async () => {
             const allData = await db.collection(`Journeys`).get()
             const data = allData.docs.map(doc => doc.data())
-            const singleActivitySumPrice = data.map(total => total.singleActivitySumPrice);
-            setsingleActivitySumPrice(singleActivitySumPrice)
-            const typeOfActivity = data.map(total => total.typeOfActivity);
-            settypeOfActivity(typeOfActivity)
-            const numberOfPeopleA = data.map(total => total.numberOfPeopleA);
-            setnumberOfPeopleA(numberOfPeopleA)
-            const numberOfRepetitions = data.map(total => total.numberOfRepetitions);
-            setnumberOfRepetitions(numberOfRepetitions)
+            const typeOfHousing = data.map(total => total.typeOfHousing);
+            settypeOfHousing(typeOfHousing)
+            const numberOfNights = data.map(total => total.numberOfNights);
+            setnumberOfNights(numberOfNights)
+            const housingSumPrice = data.map(total => total.housingSumPrice);
+            sethousingSumPrice(housingSumPrice)
+            const onePersonOneNight = data.map(total => total.one_person_one_night_housing_price);
+            setonePersonOneNight(onePersonOneNight)
 
         }
         fetchData()
@@ -39,35 +40,31 @@ export const SingleActivities = () => {
             .collection(`Journeys`)
             .doc("1")
             .delete({
-                singleActivitySumPrice: singleActivitySumPrice
+
             })
     }
+
+
     return (
         <>
-            <button className={"totalPrice"}>Activities Price: {singleActivitySumPrice}</button>
-            <div className={"SingleActivities"}>
+            <button className={"totalPrice"}>Housing Price: {housingSumPrice}</button>
+            <div className={"SingleHousing"}>
                 <div className={"container"}>
                     <div className={"content"}>
-                        <div>{typeOfActivity}</div>
+                        <div>{typeOfHousing}</div>
                         <div>
                             <div className={"picto_person"}> </div>
-                            <div>{numberOfPeopleA}</div>
+                            <div>{onePersonOneNight}</div>
                         </div>
                         <div>
                             <div className={"picto_update"}> </div>
-                            <div>{numberOfRepetitions}</div>
+                            <div>Number of nights: {numberOfNights}</div>
                         </div>
 
                     </div>
                     <button onClick={handledelete} className={"picto_bin"}> </button>
                 </div>
-
-
-
-
             </div>
-
         </>
-
     )
 }

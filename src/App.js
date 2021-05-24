@@ -15,6 +15,7 @@ import {Activities} from "./components/Activities/Activities";
 import {MyJourneys} from "./components/MyJourneys/MyJourneys";
 import {SelectedJourney} from "./components/SelectedJourney/SelectedJourney";
 import {SingleActivities} from "./components/SingleActivities/SingleActivities";
+// import {SingleHousingp} from "./components/SingleHousingp/SingleHousingp";
 
 
 
@@ -36,7 +37,7 @@ function App() {
                 <Route path="/MyJourneys" component={MyJourneys}/>
                 <Route path="/SelectedJourney/:id" component={SelectedJourney}/>
                 <Route path="/SingleActivities/:id" component={SingleActivities}/>
-                <Route path="/singleHousing/:id" component={NewJourney}/>
+                {/*<Route path="/SingleHousingp/:id" component={SingleHousingp}/>*/}
             </Switch>
 
 
