@@ -40,29 +40,6 @@ export const MainData = () => {
                 extra: extra_price,
             })
     }
-
-
-    // const InputCheckbox = ({name}) => {
-    //     const [checked, setChecked] = useState(false);
-    //
-    //     const handleCheck = () => {
-    //         setCheck((!checked))
-    //         setChecked(!checked)
-    //     }
-    //
-    //     return (
-    //         <div className={"myCheck"}>
-    //             <input onChange={handleCheck} className={"InputCheckbox"} type="checkbox" name={name}/>
-    //             <label htmlFor={name}>{name}</label>
-    //
-    //             <div>
-    //
-    //             </div>
-    //         </div>
-    //
-    //     )
-    // }
-
     return (
         <div className={"MainData"}>
             <TotalPrice value={totalTripPrice} />

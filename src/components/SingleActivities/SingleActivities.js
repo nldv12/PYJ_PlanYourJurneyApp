@@ -9,6 +9,7 @@ import firebase, {db} from "../../firebase";
 import {Link, useParams} from "react-router-dom";
 
 
+
 export const SingleActivities = () => {
     const {id} = useParams();
 
@@ -25,18 +26,20 @@ export const SingleActivities = () => {
     }, []);
 
 
-    console.log(data)
 
-    const handledelete = () => {
-        db.collection(`Journeys`).doc(id).collection(`Activities`)
-            .doc()
-            .delete({})
-    }
+    const allPrices = data.map(el => el.singleActivitySumPrice)
+
+    const totalActivPrice = allPrices.reduce((a, b) => a + b, 0)
+
+
+
+
     return (
         <>
             <div className={"SingleActivities"}>
                 <Link to={`/Activities/${id}`} className={"add_new"}>Add activity </Link>
-                <button className={"totalPrice"}>Activities Price: 0</button>
+                <Link to={`/SelectedJourney/${id}`} className={"back_arrow"}></Link>
+                <button className={"totalPrice"}>Activities Price: {totalActivPrice}</button>
 
 
                 {data.map(el => (
@@ -45,17 +48,21 @@ export const SingleActivities = () => {
                                 <div className={"content"}>
                                     <div>{el.typeOfActivity}</div>
                                     <div>
-                                        <div className={"picto_person"}></div>
+                                        <div className={"picto_person"}> </div>
                                         <div>{el.numberOfPeopleA}</div>
                                     </div>
                                     <div>
-                                        <div className={"picto_update"}></div>
+                                        <div className={"picto_update"}> </div>
                                         <div>{el.numberOfRepetitions}</div>
                                     </div>
                                 </div>
                                 <div className={"atr_price"}>{el.typeOfActivity} price: {el.singleActivitySumPrice}</div>
                             </div>
-                            <button onClick={handledelete} className={"picto_bin"}> </button>
+                            <button onClick={() => {
+                                db.collection(`Journeys`).doc(id).collection(`Activities`)
+                                    .doc(el.id)
+                                    .delete()
+                            }} className={"picto_bin"}> </button>
                         </div>
                 ))}
             </div>
@@ -64,21 +71,3 @@ export const SingleActivities = () => {
     )
 }
 
-// {/*<button className={"totalPrice"}>Activities Price: {singleActivitySumPrice}</button>*/}
-// {/*<div className={"SingleActivities"}>*/}
-// {/*    <div className={"container"}>*/}
-// {/*        <div className={"content"}>*/}
-// {/*            <div>{typeOfActivity}</div>*/}
-// {/*            <div>*/}
-// {/*                <div className={"picto_person"}> </div>*/}
-// {/*                <div>{numberOfPeopleA}</div>*/}
-// {/*            </div>*/}
-// {/*            <div>*/}
-// {/*                <div className={"picto_update"}> </div>*/}
-// {/*                <div>{numberOfRepetitions}</div>*/}
-// {/*            </div>*/}
-//
-// {/*        </div>*/}
-// {/*        <button onClick={handledelete} className={"picto_bin"}> </button>*/}
-// {/*    </div>*/}
-// {/*</div>*/}

@@ -19,26 +19,13 @@ export const ActivitiesSecFile = () => {
                 return snapshot.data()
             })
             setPrevState(allData)
-
-
         }
 
         fetchData()
 
+
     }, []);
     console.log(prevState)
-
-
-    // function timedRefresh() {
-    //     setTimeout("location.reload(true);",500);
-    // }
-    //
-    // if (prevState===undefined) {
-    //     timedRefresh()
-    // }
-
-
-
 
     let singleActivitySumPrice = parseFloat(priceForOnePersonA) * parseFloat(numberOfPeopleA) * parseFloat(numberOfRepetitions)
 
@@ -58,30 +45,54 @@ export const ActivitiesSecFile = () => {
         )
     }
 
-    return (
+    // if (prevState.singleActivitySumPrice === undefined) {
+    //     console.log("wicej niż zero")
+    //     return (
+    //         <>
+    //         <h1>loading...</h1>
+    //         </>
+    //     )
+    // }else if (prevState.singleActivitySumPrice > 0) {
+    //     return (
+    //         <>
+    //             <h1>loading...</h1>
+    //         </>
+    //     )
+    // } else {}
+        return (
+            <div className={"Activities"}>
 
-        <div className={"Activities"}>
+                <TotalPrice value={singleActivitySumPrice}/>
 
-            <TotalPrice value={singleActivitySumPrice}/>
+                <div className={"form"}>
 
-            <div className={"form"}>
-
-                <div className={"formElement"}>
-                    <FormLabel name={"Number of people"}/>
-                    <InputNumber handleText={setNumberOfPeopleA} placeholder={"How many people are attending"}/>
-                </div>
-                <div className={"formElement"}>
-                    <FormLabel name={"Price for 1 person"}/>
-                    <InputNumber handleText={setPriceForOnePersonA} placeholder={"For example: 250"}/>
-                </div>
-                <div className={"formElement"}>
-                    <FormLabel name={"If more than one time:"}/>
-                    <InputNumber handleText={setNumberOfRepetitions} placeholder={"Number of repetitions"}/>
-                </div>
-                <div className={"buttons"}>
-                    <Link to={`/SingleActivities/${id}`} onClick={handleClick} className={"btn"}>Submit</Link>
+                    <div className={"formElement"}>
+                        <FormLabel name={"Number of people"}/>
+                        <InputNumber handleText={setNumberOfPeopleA} placeholder={"How many people are attending"}/>
+                    </div>
+                    <div className={"formElement"}>
+                        <FormLabel name={"Price for 1 person"}/>
+                        <InputNumber handleText={setPriceForOnePersonA} placeholder={"For example: 250"}/>
+                    </div>
+                    <div className={"formElement"}>
+                        <FormLabel name={"If more than one time:"}/>
+                        <InputNumber handleText={setNumberOfRepetitions} placeholder={"Number of repetitions"}/>
+                    </div>
+                    <div className={"buttons"}>
+                        <Link to={`/SingleActivities/${id}`} onClick={handleClick} className={"btn"}>Submit</Link>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+
+
+
+
+
+
+
+
+
+
+
 }

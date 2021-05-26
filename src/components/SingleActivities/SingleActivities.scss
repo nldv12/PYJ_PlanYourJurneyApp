@@ -33,6 +33,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  .back_arrow {
+    background-image: url("../../images/back.svg");
+    width: 39px;
+    height: 37px;
+    position: fixed;
+    left: 18px;
+    top: 28px;
+
+  }
   .totalPrice {
     margin: 0;
   }

@@ -16,6 +16,7 @@ export const Activities = () => {
         db.collection(`Journeys`).doc(id).collection(`Activities`)
             .add({
                 typeOfActivity: typeOfActivity,
+                singleActivitySumPrice: 0
             })
             .then(
                 (doc) => {localStorage.setItem("activity_id", doc.id)},

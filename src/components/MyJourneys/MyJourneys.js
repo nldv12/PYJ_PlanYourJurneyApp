@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react";
 import "./MyJourneys.scss"
 import {Link} from "react-router-dom";
 import {db} from "../../firebase";
+import {InputText} from "../MainCOMPONENTS/MainCOMPONENTS";
 
 
 export const MyJourneys = () => {
     const [data, setData] = useState([]);
+    // const [search, setSearch] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,6 +22,7 @@ export const MyJourneys = () => {
     return (
         <div className={"MyJourneys"}>
             <div className={"title"}>My Journeys</div>
+            {/*<InputText  placeholder={"Search"} onChange={e => {setSearch(e.target.value)}} />*/}
             <div>
                 {data.map(el => (
                     <Link key={el.id}  to={`/SelectedJourney/${el.id}`} className={"singleJourney"}>
