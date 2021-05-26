@@ -4,6 +4,28 @@
 //  margin-top: 18px;
 //  margin-left: 67px;
 //}
+.add_new {
+  position: fixed;
+  left: 50px;
+  bottom: 15px;
+  font-size: 18px;
+  text-align: center;
+  width: 200px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-style: italic;
+  margin-top: 20px;
+  color: $myTomato;
+  text-decoration: none;
+  padding: 18px 36px;
+  background: white;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+.add_new:active {
+  transform: scale(0.9);
+}
+
 
 .SingleActivities {
   margin-top: 20px;
@@ -11,9 +33,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  .totalPrice {
+    margin: 0;
+  }
+  .atr_price {
+    text-align: right;
+    width: 270px;
+    color: white;
+    background-color: #08812a;
+    padding: 5px;
+    border-radius: 0 0 10px 10px;
+  }
 
   .container {
-    margin: 10px 0;
+    margin: 50px 0 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +56,7 @@
       width: 250px;
       background: #05a733;
       padding: 15px 15px 15px 15px;
-      border-radius: 10px;
+      border-radius: 10px 10px 0 0 ;
       line-height: 30px;
       transition: 0.3s;
       color: white;
@@ -49,6 +82,7 @@
       width: 56px;
       height: 56px;
       transition: 0.3s;
+      border: none;
 
     }
     .picto_bin:active {

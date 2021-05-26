@@ -6,68 +6,79 @@ import "./SingleActivities.scss"
 // import {Link} from "react-router-dom";
 // import {Link, useParams} from "react-router-dom";
 import firebase, {db} from "../../firebase";
+import {Link, useParams} from "react-router-dom";
 
 
 export const SingleActivities = () => {
-    const [singleActivitySumPrice, setsingleActivitySumPrice] = useState("0");
-    const [typeOfActivity, settypeOfActivity] = useState("0");
-    const [numberOfPeopleA, setnumberOfPeopleA] = useState("0");
-    const [numberOfRepetitions, setnumberOfRepetitions] = useState("0");
+    const {id} = useParams();
 
+    const [data, setData] = useState([]);
 
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection(`Journeys`).get()
-            const data = allData.docs.map(doc => doc.data())
-            const singleActivitySumPrice = data.map(total => total.singleActivitySumPrice);
-            setsingleActivitySumPrice(singleActivitySumPrice)
-            const typeOfActivity = data.map(total => total.typeOfActivity);
-            settypeOfActivity(typeOfActivity)
-            const numberOfPeopleA = data.map(total => total.numberOfPeopleA);
-            setnumberOfPeopleA(numberOfPeopleA)
-            const numberOfRepetitions = data.map(total => total.numberOfRepetitions);
-            setnumberOfRepetitions(numberOfRepetitions)
-
+            const allData = await db.collection(`Journeys`).doc(id).collection(`Activities`).get()
+            const data = allData.docs.map(doc => ({...doc.data(), id: doc.id}))
+            setData(data)
         }
         fetchData()
     }, []);
 
+
+    console.log(data)
+
     const handledelete = () => {
-        firebase
-            .firestore()
-            .collection(`Journeys`)
-            .doc("1")
-            .delete({
-                singleActivitySumPrice: singleActivitySumPrice
-            })
+        db.collection(`Journeys`).doc(id).collection(`Activities`)
+            .doc()
+            .delete({})
     }
     return (
         <>
-            <button className={"totalPrice"}>Activities Price: {singleActivitySumPrice}</button>
             <div className={"SingleActivities"}>
-                <div className={"container"}>
-                    <div className={"content"}>
-                        <div>{typeOfActivity}</div>
-                        <div>
-                            <div className={"picto_person"}> </div>
-                            <div>{numberOfPeopleA}</div>
+                <Link to={`/Activities/${id}`} className={"add_new"}>Add activity </Link>
+                <button className={"totalPrice"}>Activities Price: 0</button>
+
+
+                {data.map(el => (
+                        <div key={el.id} className={"container"}>
+                            <div>
+                                <div className={"content"}>
+                                    <div>{el.typeOfActivity}</div>
+                                    <div>
+                                        <div className={"picto_person"}></div>
+                                        <div>{el.numberOfPeopleA}</div>
+                                    </div>
+                                    <div>
+                                        <div className={"picto_update"}></div>
+                                        <div>{el.numberOfRepetitions}</div>
+                                    </div>
+                                </div>
+                                <div className={"atr_price"}>{el.typeOfActivity} price: {el.singleActivitySumPrice}</div>
+                            </div>
+                            <button onClick={handledelete} className={"picto_bin"}> </button>
                         </div>
-                        <div>
-                            <div className={"picto_update"}> </div>
-                            <div>{numberOfRepetitions}</div>
-                        </div>
-
-                    </div>
-                    <button onClick={handledelete} className={"picto_bin"}> </button>
-                </div>
-
-
-
-
+                ))}
             </div>
 
         </>
-
     )
 }
+
+// {/*<button className={"totalPrice"}>Activities Price: {singleActivitySumPrice}</button>*/}
+// {/*<div className={"SingleActivities"}>*/}
+// {/*    <div className={"container"}>*/}
+// {/*        <div className={"content"}>*/}
+// {/*            <div>{typeOfActivity}</div>*/}
+// {/*            <div>*/}
+// {/*                <div className={"picto_person"}> </div>*/}
+// {/*                <div>{numberOfPeopleA}</div>*/}
+// {/*            </div>*/}
+// {/*            <div>*/}
+// {/*                <div className={"picto_update"}> </div>*/}
+// {/*                <div>{numberOfRepetitions}</div>*/}
+// {/*            </div>*/}
+//
+// {/*        </div>*/}
+// {/*        <button onClick={handledelete} className={"picto_bin"}> </button>*/}
+// {/*    </div>*/}
+// {/*</div>*/}

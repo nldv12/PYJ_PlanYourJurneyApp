@@ -1,8 +1,6 @@
 import {Switch, Route} from "react-router-dom";
 import React from "react";
 import './App.css';
-// import {db} from "./firebase"
-// import firebase from "./firebase"
 import {Menu} from "./components/Menu/Menu";
 import {Home} from "./components/Home/Home";
 import {NewJourney} from "./components/NewJourney/NewJourney";
@@ -15,6 +13,7 @@ import {Activities} from "./components/Activities/Activities";
 import {MyJourneys} from "./components/MyJourneys/MyJourneys";
 import {SelectedJourney} from "./components/SelectedJourney/SelectedJourney";
 import {SingleActivities} from "./components/SingleActivities/SingleActivities";
+import {ActivitiesSecFile} from "./components/ActivitiesSecFile/ActivitiesSecFile";
 // import {SingleHousingp} from "./components/SingleHousingp/SingleHousingp";
 
 
@@ -33,7 +32,8 @@ function App() {
                 <Route path="/Plane" component={IfPlane}/>
                 <Route path="/Car" component={IfCar}/>
                 <Route path="/Bus" component={IfBus}/>
-                <Route path="/Activities" component={Activities}/>
+                <Route path="/Activities/:id" component={Activities}/>
+                <Route path="/ActivitiesSecFile/:id" component={ActivitiesSecFile}/>
                 <Route path="/MyJourneys" component={MyJourneys}/>
                 <Route path="/SelectedJourney/:id" component={SelectedJourney}/>
                 <Route path="/SingleActivities/:id" component={SingleActivities}/>

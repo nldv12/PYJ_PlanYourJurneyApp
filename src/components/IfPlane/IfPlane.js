@@ -10,6 +10,7 @@ export const IfPlane = () => {
     const [ticket_price, setTicket_price] = useState("0");
     const [numberOfPeople, setNumberOfPeople] = useState("0");
     const [food_price, setFood_price] = useState("0");
+    const [docID, setdocID] = useState("");
 
 
     let planeSumPrice = (parseFloat(ticket_price) + parseFloat(food_price)) * parseFloat(numberOfPeople)

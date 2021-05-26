@@ -5,9 +5,6 @@ import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {Link} from "react-router-dom";
 import firebase, {db} from "../../firebase";
 
-// TODO: what if full price
-
-
 
 export const Housing = () => {
     const [housing, setHousing] = useState("Apartment");
@@ -15,18 +12,28 @@ export const Housing = () => {
     const [housing_price, setHousing_price] = useState("0");
 
     const [prevState, setPrevState] = useState("0");
-    console.log(prevState.numberOfPeople)
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection(`Journeys`).get()
-            const data = allData.docs.map(doc => doc.data())
-            setPrevState(...data)
+            const allData = await db.collection(`Journeys`).doc(localStorage.getItem("journey_id")).get().then((snapshot) => {
+                return snapshot.data()
+            })
+            setPrevState(allData)
         }
         fetchData()
     }, []);
 
-    let housingSumPrice = parseFloat(numberOfNights) * parseFloat(housing_price) * parseFloat(prevState.numberOfPeople)
-    let totalTripPrice = parseFloat(prevState.sumPrice) + housingSumPrice
+    function timedRefresh() {
+        setTimeout("location.reload(true);",500);
+    }
+
+    if (prevState===undefined) {
+        timedRefresh()
+    }
+
+    let housingSumPrice = (prevState===undefined)? 0 : parseFloat(numberOfNights) * parseFloat(housing_price) * parseFloat(prevState.numberOfPeople)
+    let totalTripPrice = (prevState===undefined)? 0 : parseFloat(prevState.sumPrice) + housingSumPrice
+
+
 
     const handleClick = (e) => {
         firebase
@@ -35,21 +42,19 @@ export const Housing = () => {
             .doc(localStorage.getItem("journey_id"))
             .set({
                 ...prevState,
+                id: localStorage.getItem("journey_id"),
                 totalTripPrice: totalTripPrice,
                 typeOfHousing: housing,
                 numberOfNights: numberOfNights,
                 housingSumPrice: housingSumPrice,
                 one_person_one_night_housing_price: housing_price,
             })
-
-
     }
 
     return (
         <div className={"Housing"}>
             <TotalPrice value={totalTripPrice} />
             <div className={"form"}>
-                {/*<p>Housing</p>*/}
                 <div className={"formElement"}>
                     <FormLabel name={"Type of accommodation"}/>
                     <InputSelect handleText={setHousing} value1={"Apartment"} value2={"Hotel"} value3={"Hostel"} value4={"Camping"}
@@ -66,7 +71,6 @@ export const Housing = () => {
                 <Link to="/MainData">
                     <button onClick={handleClick} className={"btn"}>Next</button>
                 </Link>
-                {/*<p>Housing</p>*/}
             </div>
 
         </div>

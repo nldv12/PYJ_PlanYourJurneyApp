@@ -6,6 +6,48 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .sec_btn {
+    font-size: 18px;
+    text-align: center;
+    width: 200px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-style: italic;
+    margin-top: 20px;
+    color: white;
+    text-decoration: none;
+    padding: 18px 36px;
+    background: $myTomato;
+    border-radius: 20px;
+    transition: 0.3s;
+  }
+  .sec_btn:active {
+    transform: scale(0.9);
+  }
+  .delete {
+    height: 100px;
+    width: 100px;
+    background-color: #47b8e0;
+    display: flex;
+    color: white;
+    text-decoration: none;
+  }
+  .picto_bin {
+    align-self: flex-end;
+    margin-right: 10px;
+    border-radius: 10px;
+    background-color: white;
+    background-image: url("../../images/delete.svg");
+    width: 56px;
+    height: 56px;
+    transition: 0.3s;
+    border: none;
+
+  }
+  .picto_bin:active {
+    transform: scale(0.9);
+  }
   .selected_container {
     width: 332px;
     background: white;

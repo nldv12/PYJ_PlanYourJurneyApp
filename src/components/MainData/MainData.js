@@ -11,14 +11,15 @@ export const MainData = () => {
     const [destination, setDestination] = useState("");
     const [from, setFrom] = useState("");
     const [extra_price, setExtra_price] = useState("0");
-    const [check, setCheck] = useState(false);
+    // const [check, setCheck] = useState(false);
     const [prevState, setPrevState] = useState("0");
 
     useEffect(() => {
         const fetchData = async () => {
-            const allData = await db.collection(`Journeys`).get()
-            const data = allData.docs.map(doc => doc.data())
-            setPrevState(...data)
+            const allData = await db.collection(`Journeys`).doc(localStorage.getItem("journey_id")).get().then((snapshot) => {
+                return snapshot.data()
+            })
+            setPrevState(allData)
         }
         fetchData()
     }, []);
@@ -33,36 +34,34 @@ export const MainData = () => {
             .doc(localStorage.getItem("journey_id"))
             .set({
                 ...prevState,
-                totalTripPrice: totalTripPrice,
+                totalTripPrice: totalTripPrice.toFixed(),
                 destination: destination,
                 from: from,
                 extra: extra_price,
             })
-
-
     }
 
 
-    const InputCheckbox = ({name}) => {
-        const [checked, setChecked] = useState(false);
-
-        const handleCheck = () => {
-            setCheck((!checked))
-            setChecked(!checked)
-        }
-
-        return (
-            <div className={"myCheck"}>
-                <input onChange={handleCheck} className={"InputCheckbox"} type="checkbox" name={name}/>
-                <label htmlFor={name}>{name}</label>
-
-                <div>
-
-                </div>
-            </div>
-
-        )
-    }
+    // const InputCheckbox = ({name}) => {
+    //     const [checked, setChecked] = useState(false);
+    //
+    //     const handleCheck = () => {
+    //         setCheck((!checked))
+    //         setChecked(!checked)
+    //     }
+    //
+    //     return (
+    //         <div className={"myCheck"}>
+    //             <input onChange={handleCheck} className={"InputCheckbox"} type="checkbox" name={name}/>
+    //             <label htmlFor={name}>{name}</label>
+    //
+    //             <div>
+    //
+    //             </div>
+    //         </div>
+    //
+    //     )
+    // }
 
     return (
         <div className={"MainData"}>
@@ -80,13 +79,11 @@ export const MainData = () => {
                     <FormLabel name={"Any extra fees"}/>
                     <InputNumber handleText={setExtra_price} placeholder={"Type here sum of all extra fees"}/>
                 </div>
-                <div className={"formElement checkbox"}>
-                    <InputCheckbox name={"I would like to add activities"}/>
-                </div>
-
-
-                {/*<Link to={checked"/Activities"} className={"buttons"}>*/}
-                <Link to={check ? "/Activities" : "/MyJourneys"}>
+                {/*<div className={"formElement checkbox"}>*/}
+                {/*    <InputCheckbox name={"I would like to add activities"}/>*/}
+                {/*</div>*/}
+                {/*<Link to={check ? "/Activities" : "/MyJourneys"}>*/}
+                <Link to="/MyJourneys">
                     <button onClick={handleClick} className={"btn"}>Next</button>
                 </Link>
             </div>
