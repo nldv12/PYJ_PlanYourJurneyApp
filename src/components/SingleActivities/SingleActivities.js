@@ -28,8 +28,20 @@ export const SingleActivities = () => {
 
 
     const allPrices = data.map(el => el.singleActivitySumPrice)
-
     const totalActivPrice = allPrices.reduce((a, b) => a + b, 0)
+
+    const handleDeleteActivity = (elid) => {
+        db.collection(`Journeys`).doc(id).collection(`Activities`)
+            .doc(elid)
+            .delete()
+            .then(() => {
+                const activTemp = data.filter((doc) => doc.id !== elid);
+                setData(activTemp);
+            })
+            .catch((error) => {
+                console.error("Error removing document: ", error);
+            });
+    };
 
 
 
@@ -58,11 +70,7 @@ export const SingleActivities = () => {
                                 </div>
                                 <div className={"atr_price"}>{el.typeOfActivity} price: {el.singleActivitySumPrice}</div>
                             </div>
-                            <button onClick={() => {
-                                db.collection(`Journeys`).doc(id).collection(`Activities`)
-                                    .doc(el.id)
-                                    .delete()
-                            }} className={"picto_bin"}> </button>
+                            <button onClick={() => handleDeleteActivity(el.id)} className={"picto_bin"}> </button>
                         </div>
                 ))}
             </div>

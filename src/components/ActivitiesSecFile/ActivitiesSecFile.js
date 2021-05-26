@@ -2,10 +2,11 @@ import React, {useEffect, useState} from "react";
 import "./ActivitiesSecFile.scss"
 import {InputNumber, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
-import {Link, useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import {db} from "../../firebase";
 
 export const ActivitiesSecFile = () => {
+    const history = useHistory();
     const {id} = useParams();
     const [numberOfPeopleA, setNumberOfPeopleA] = useState("1");
     const [priceForOnePersonA, setPriceForOnePersonA] = useState("0");
@@ -25,7 +26,6 @@ export const ActivitiesSecFile = () => {
 
 
     }, []);
-    console.log(prevState)
 
     let singleActivitySumPrice = parseFloat(priceForOnePersonA) * parseFloat(numberOfPeopleA) * parseFloat(numberOfRepetitions)
 
@@ -41,24 +41,11 @@ export const ActivitiesSecFile = () => {
                 priceForOnePersonA: priceForOnePersonA,
                 numberOfRepetitions: numberOfRepetitions
             }).then (
-            setPrevState([])
+            history.push(`/SingleActivities/${id}`)
         )
     }
 
-    // if (prevState.singleActivitySumPrice === undefined) {
-    //     console.log("wicej niż zero")
-    //     return (
-    //         <>
-    //         <h1>loading...</h1>
-    //         </>
-    //     )
-    // }else if (prevState.singleActivitySumPrice > 0) {
-    //     return (
-    //         <>
-    //             <h1>loading...</h1>
-    //         </>
-    //     )
-    // } else {}
+
         return (
             <div className={"Activities"}>
 
@@ -79,7 +66,7 @@ export const ActivitiesSecFile = () => {
                         <InputNumber handleText={setNumberOfRepetitions} placeholder={"Number of repetitions"}/>
                     </div>
                     <div className={"buttons"}>
-                        <Link to={`/SingleActivities/${id}`} onClick={handleClick} className={"btn"}>Submit</Link>
+                        <button onClick={handleClick} className={"btn"}>Submit</button>
                     </div>
                 </div>
             </div>

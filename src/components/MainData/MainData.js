@@ -2,12 +2,14 @@ import React, {useEffect, useState} from "react";
 import "./MainData.scss"
 import {InputNumber, InputText, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import firebase, {db} from "../../firebase";
 
 
 
 export const MainData = () => {
+    const history = useHistory();
+
     const [destination, setDestination] = useState("");
     const [from, setFrom] = useState("");
     const [extra_price, setExtra_price] = useState("0");
@@ -38,7 +40,9 @@ export const MainData = () => {
                 destination: destination,
                 from: from,
                 extra: extra_price,
-            })
+            }).then((doc) => {
+            history.push("/AllJourneys")
+        })
     }
     return (
         <div className={"MainData"}>
@@ -60,9 +64,9 @@ export const MainData = () => {
                 {/*    <InputCheckbox name={"I would like to add activities"}/>*/}
                 {/*</div>*/}
                 {/*<Link to={check ? "/Activities" : "/AllJourneys"}>*/}
-                <Link to="/AllJourneys">
+                {/*<Link to="/AllJourneys">*/}
                     <button onClick={handleClick} className={"btn"}>Next</button>
-                </Link>
+                {/*</Link>*/}
             </div>
 
 

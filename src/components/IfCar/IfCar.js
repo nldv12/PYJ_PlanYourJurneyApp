@@ -2,11 +2,12 @@ import React, {useEffect, useState} from "react";
 import "./IfCar.scss"
 import {InputNumber, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import firebase, {db} from "../../firebase";
 
 
 export const IfCar = () => {
+    const history = useHistory();
     const [distance, setDistance] = useState("0");
     const [litres, setLitres] = useState("0");
     const [pricePerLitre, setPricePerLitre] = useState("0");
@@ -41,6 +42,7 @@ export const IfCar = () => {
                 extra: 0
             }).then((doc) => {
             localStorage.setItem("journey_id", doc.id)
+            history.push("/Housing");
         })
     }
 
@@ -69,9 +71,9 @@ export const IfCar = () => {
                     <FormLabel name={"Food price"}/>
                     <InputNumber handleText={setFood_price} placeholder={"Price for 1 person per 1 day"}/>
                 </div>
-                <Link to="/Housing">
+                {/*<Link to="/Housing">*/}
                     <button onClick={handleClick} className={"btn"}>Next</button>
-                </Link>
+                {/*</Link>*/}
             </div>
 
         </div>

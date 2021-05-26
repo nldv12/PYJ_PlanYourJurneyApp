@@ -2,11 +2,13 @@ import React, {useEffect, useState} from "react";
 import "./Housing.scss"
 import {InputNumber, InputSelect, TotalPrice} from "../MainCOMPONENTS/MainCOMPONENTS";
 import {FormLabel} from "../MainCOMPONENTS/MainCOMPONENTS";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import firebase, {db} from "../../firebase";
 
 
 export const Housing = () => {
+    const history = useHistory();
+
     const [housing, setHousing] = useState("Apartment");
     const [numberOfNights, setNumberOfNights] = useState("0");
     const [housing_price, setHousing_price] = useState("0");
@@ -22,13 +24,7 @@ export const Housing = () => {
         fetchData()
     }, []);
 
-    function timedRefresh() {
-        setTimeout("location.reload(true);",500);
-    }
 
-    if (prevState===undefined) {
-        timedRefresh()
-    }
 
     let housingSumPrice = (prevState===undefined)? 0 : parseFloat(numberOfNights) * parseFloat(housing_price) * parseFloat(prevState.numberOfPeople)
     let totalTripPrice = (prevState===undefined)? 0 : parseFloat(prevState.sumPrice) + housingSumPrice
@@ -48,8 +44,14 @@ export const Housing = () => {
                 numberOfNights: numberOfNights,
                 housingSumPrice: housingSumPrice,
                 one_person_one_night_housing_price: housing_price,
-            })
+            }).then((doc) => {
+            history.push("/MainData")
+        })
     }
+
+    console.log(prevState)
+
+
 
     return (
         <div className={"Housing"}>
@@ -68,9 +70,9 @@ export const Housing = () => {
                     <FormLabel name={"Price of accommodation"}/>
                     <InputNumber handleText={setHousing_price} placeholder={"Price for 1 person per 1 night"}/>
                 </div>
-                <Link to="/MainData">
+                {/*<Link to="/MainData">*/}
                     <button onClick={handleClick} className={"btn"}>Next</button>
-                </Link>
+                {/*</Link>*/}
             </div>
 
         </div>

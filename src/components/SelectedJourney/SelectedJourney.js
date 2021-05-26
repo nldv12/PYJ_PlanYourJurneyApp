@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import "./SelectedJourney.scss"
 
-import {Link, useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import {db} from "../../firebase";
 
 
 export const SelectedJourney = () => {
+    const history = useHistory();
+
     const {id} = useParams();
     const [doc, setDoc] = useState([]);
 
@@ -29,6 +31,8 @@ export const SelectedJourney = () => {
             db.collection(`Journeys`)
             .doc(id)
             .delete({
+            }).then((doc) => {
+                history.push("/AllJourneys")
             })
     }
     const type = doc.typeOFtransport;
@@ -63,7 +67,7 @@ export const SelectedJourney = () => {
                     </div>
                 </div>
             </div>
-            <Link to="/AllJourneys" onClick={handledelete} className={"picto_bin"}> </Link>
+            <div onClick={handledelete} className={"picto_bin"}> </div>
 
 
 
