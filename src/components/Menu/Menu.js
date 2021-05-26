@@ -39,7 +39,7 @@ export const Menu = () => {
                                 <Link onClick={handleClick} to="/NewJourney" className={"nav-link"}>Plan new Journey</Link>
                             </li>
                             <li className={"nav_item"}>
-                                <Link onClick={handleClick} to="/MyJourneys" className={"nav-link"}>My Journeys</Link>
+                                <Link onClick={handleClick} to="/AllJourneys" className={"nav-link"}>All Journeys</Link>
                             </li>
                             {/*<li className={"nav-item"}>*/}
                             {/*    <Link onClick={handleClick} to="/" className={"nav-link"}>About App</Link>*/}

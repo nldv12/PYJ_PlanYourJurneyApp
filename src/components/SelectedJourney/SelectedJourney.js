@@ -63,12 +63,12 @@ export const SelectedJourney = () => {
                     </div>
                 </div>
             </div>
-            <Link to="/MyJourneys" onClick={handledelete} className={"picto_bin"}> </Link>
+            <Link to="/AllJourneys" onClick={handledelete} className={"picto_bin"}> </Link>
 
 
 
             <Link to={`/SingleActivities/${doc.id}`} className={"btn btn_blue"}>Activities</Link>
-            <Link to="/MyJourneys" className={"sec_btn"}>MY JOURNEYS</Link>
+            <Link to="/AllJourneys" className={"sec_btn"}>MY JOURNEYS</Link>
 
             {/*<Link to="/singleHousing/:id" className={"btn btn_blue"}>Check Accommodation</Link>*/}
         </div>

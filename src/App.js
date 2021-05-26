@@ -10,7 +10,7 @@ import {IfCar} from "./components/IfCar/IfCar";
 import {IfBus} from "./components/IfBus/IfBus";
 import {IfPlane} from "./components/IfPlane/IfPlane";
 import {Activities} from "./components/Activities/Activities";
-import {MyJourneys} from "./components/MyJourneys/MyJourneys";
+import {AllJourneys} from "./components/AllJourneys/AllJourneys";
 import {SelectedJourney} from "./components/SelectedJourney/SelectedJourney";
 import {SingleActivities} from "./components/SingleActivities/SingleActivities";
 import {ActivitiesSecFile} from "./components/ActivitiesSecFile/ActivitiesSecFile";
@@ -34,7 +34,7 @@ function App() {
                 <Route path="/Bus" component={IfBus}/>
                 <Route path="/Activities/:id" component={Activities}/>
                 <Route path="/ActivitiesSecFile/:id" component={ActivitiesSecFile}/>
-                <Route path="/MyJourneys" component={MyJourneys}/>
+                <Route path="/AllJourneys" component={AllJourneys}/>
                 <Route path="/SelectedJourney/:id" component={SelectedJourney}/>
                 <Route path="/SingleActivities/:id" component={SingleActivities}/>
                 {/*<Route path="/SingleHousingp/:id" component={SingleHousingp}/>*/}

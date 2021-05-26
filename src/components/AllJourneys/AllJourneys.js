@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
-import "./MyJourneys.scss"
+import "./AllJourneys.scss"
 import {Link} from "react-router-dom";
 import {db} from "../../firebase";
 import {InputText} from "../MainCOMPONENTS/MainCOMPONENTS";
 
 
-export const MyJourneys = () => {
+export const AllJourneys = () => {
     const [data, setData] = useState([]);
-    // const [search, setSearch] = useState("");
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,11 +20,17 @@ export const MyJourneys = () => {
     }, []);
 
     return (
-        <div className={"MyJourneys"}>
-            <div className={"title"}>My Journeys</div>
-            {/*<InputText  placeholder={"Search"} onChange={e => {setSearch(e.target.value)}} />*/}
-            <div>
-                {data.map(el => (
+        <div className={"AllJourneys"}>
+            {/*<div className={"title"}>My Journeys</div>*/}
+            <input className={"inputText"} type="text" placeholder="Search by destination" name="Search" onChange={e => {setSearch(e.target.value)}}/>
+            <div className="all_journeys">
+                {data.filter((val)=> {
+                    if (search === "") {
+                        return val
+                    } else if (val.destination.toLowerCase().includes(search.toLowerCase())) {
+                        return val
+                    }
+                }).map(el => (
                     <Link key={el.id}  to={`/SelectedJourney/${el.id}`} className={"singleJourney"}>
                         <div className={"sum_Line second_line"}>From:  <span>{el.from}</span></div>
                         <div className={"sum_Line second_line"}>Destiation: <span>{el.destination}</span></div>

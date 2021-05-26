@@ -59,8 +59,8 @@ export const MainData = () => {
                 {/*<div className={"formElement checkbox"}>*/}
                 {/*    <InputCheckbox name={"I would like to add activities"}/>*/}
                 {/*</div>*/}
-                {/*<Link to={check ? "/Activities" : "/MyJourneys"}>*/}
-                <Link to="/MyJourneys">
+                {/*<Link to={check ? "/Activities" : "/AllJourneys"}>*/}
+                <Link to="/AllJourneys">
                     <button onClick={handleClick} className={"btn"}>Next</button>
                 </Link>
             </div>
